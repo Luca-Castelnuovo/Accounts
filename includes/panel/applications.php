@@ -15,8 +15,8 @@ function applications_list($user_id)
         <li class="collection-item avatar">
             <a href="?application={$user_application}">
                 <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$user_application}.png'"> <span class="title">{$client['name']}</span>
-                <p>Owned by <span class="blue-text">{$owner['username']}</span></p>
             </a>
+                <p>Owned by <span class="blue-text">{$owner['username']}</span></p>
         </li>
 HTML;
     }
