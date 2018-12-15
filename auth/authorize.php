@@ -96,6 +96,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applicat
                 id='{$user['id']}'";
 
         sql_query($query, false);
+    } else {
+        error_log('Client_ID:  ' . $client_id);
+        error_log('Apps:  ' . $user_applications);
     }
 
     // Redirect user with authorization_code
