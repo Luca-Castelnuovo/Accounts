@@ -32,11 +32,18 @@ function application_info($client_id)
     $CSRFtoken = csrf_gen();
 
     echo <<<HTML
+    <style>
+        .mb-0{margin-bottom:0}
+        .mt-1_52rem{margin-top:1.52rem}
+    </style>
     <div class="row">
-        <div class="col s4">
+        <a href="/home"><i class="material-icons">arrow_back</i> Go back</a>
+    </div>
+    <div class="row mb-0">
+        <div class="col s12 m2">
             <img class="responsive-img" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client_id}.png'" width="75">
         </div>
-        <div class="col s8">
+        <div class="col s12 m10">
             <h4>
                 {$client['name']}
             </h4>
@@ -44,13 +51,13 @@ function application_info($client_id)
     </div>
     <hr>
     <div class="row">
-        <div class="col s8">
+        <div class="col s12 m9">
             <h4>
                 Permissions
             </h4>
         </div>
-        <div class="col s4">
-            <a href="?revoke={$client_id}&CSRFtoken={$CSRFtoken}" class="btn waves-effect blue accent-4" onclick="return confirm('Are you sure?')">Revoke Access</a>
+        <div class="col s12 m3">
+            <a href="?revoke={$client_id}&CSRFtoken={$CSRFtoken}" class="btn waves-effect red accent-4 mt-1_52rem" onclick="return confirm('Are you sure?')">Revoke Access</a>
         </div>
     </div>
     <div class="row">
