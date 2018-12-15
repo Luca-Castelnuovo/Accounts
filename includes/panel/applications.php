@@ -36,9 +36,6 @@ function application_info($client_id)
         .mb-0{margin-bottom:0}
         .mt-1_52rem{margin-top:1.52rem}
     </style>
-    <div class="row">
-        <a href="/home"><i class="material-icons">arrow_back</i> Go back</a>
-    </div>
     <div class="row mb-0">
         <div class="col s12 m2">
             <img class="responsive-img" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client_id}.png'" width="75">
@@ -66,6 +63,9 @@ function application_info($client_id)
             <li>query scopes</li>
             <li>display description</li>
         </ul>
+    </div>
+    <div class="row">
+        <a href="/home"><i class="material-icons">arrow_back</i> Go back</a>
     </div>
 HTML;
 }
