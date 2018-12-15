@@ -2,6 +2,7 @@
 
 function applications_list($user_id)
 {
+    echo '<style>.collection .collection-item.avatar{min-height:0;}</style>';
     echo '<ul class="collection">';
 
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications']);
