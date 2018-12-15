@@ -44,12 +44,6 @@ if (empty($scopes)) {
 $user = sql_select('users', 'id,username,picture_url,applications', "id='{$_SESSION['id']}'", true);
 $user_applications = json_decode($user['applications']);
 
-//if client_id is in applications don't require conformation
-if (in_array($client_id, $user_applications)) {
-    //continue token creation
-}
-
-
 // Create authorization_token
 if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applications)) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
