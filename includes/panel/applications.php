@@ -70,9 +70,25 @@ function application_info($client_id)
 HTML;
 }
 
-function application_revoke($client_id, $CSRFtoken)
+function application_revoke($user_id, $client_id, $CSRFtoken)
 {
-    //remove app from user
-    //delete all authorization codes with client_id
-    //delete all access_tokens with client_id
+    csrf_val($CSRFtoken);
+
+    $user = sql_select('users', 'applications', "id='{$user_id}'", true);
+    $user_applications = json_decode($user['applications']);
+
+    if (in_array($client_id, $user_applications)) {
+        $index = array_search($client_id, $user_applications);
+        if ($index !== false) {
+            unset($user_applications[$index]);
+        }
+
+        $user_applications = json_encode($user_applications);
+
+        sql_update('users', ['applications' => $user_applications], 'user_id=' . $user_id);
+    }
+
+    sql_delete('authorization_codes', 'client_id=' . $client_id . 'AND user_id=' . $user_id);
+
+    sql_delete('access_tokens', 'client_id=' . $client_id . 'AND user_id=' . $user_id);
 }

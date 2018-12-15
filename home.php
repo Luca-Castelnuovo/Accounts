@@ -5,6 +5,11 @@ require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 loggedin();
 
 page_header('Home');
+
+if (isset($_GET['revoke']) && !empty($_GET['revoke']) && isset($_GET['CSRFtoken']) && !empty($_GET['CSRFtoken'])) {
+    application_revoke($_SESSION['id'], $_GET['revoke'], $_GET['CSRFtoken']);
+}
+
 ?>
 
 <?php
