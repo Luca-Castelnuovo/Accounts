@@ -1,0 +1,15 @@
+RewriteEngine On
+
+
+# Rewrite URL #
+
+RewriteRule ^sso/([^/]+)$ sso.php?domain=$1
+RewriteRule ^sso/([^/]+)/([^/]+)$ sso.php?domain=$1&CSRFtoken=$2
+
+
+# Remove .PHP from URL
+RewriteCond %{DOCUMENT_ROOT}/$1\.php -f
+RewriteRule ^(.+?)/?$ /$1.php [L]
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ - [L]
