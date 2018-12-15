@@ -27,7 +27,7 @@ HTML;
 function application_info($client_id)
 {
     $client = clean_data($client_id);
-    $client = sql_select('clients', 'redirect_url,user_id,name,logo_url,description,suspended', "client_id='{$user_application}'", true);
+    $client = sql_select('clients', 'redirect_url,user_id,name,logo_url,description,suspended', "client_id='{$client_id}'", true);
 
     echo <<<HTML
     <h4>{$client['name']}</h4>
