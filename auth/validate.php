@@ -2,6 +2,8 @@
 
 require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 
+// add validation before somebody can try to verify token
+
 $access_token = check_data($_REQUEST['access_token'], true, 'access_token', true);
 
 $access = sql_select('access_tokens', 'client_id,user_id,expires,scope', "access_token='{$access_token}'", true);
