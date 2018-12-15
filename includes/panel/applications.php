@@ -4,10 +4,7 @@ function applications_list($user_id)
 {
     echo '<ul class="collection">';
 
-    $user_applications = sql_select('users', 'applications', "id='{$user_id}'", true)['applications'];
-
-    var_dump($user_applications);
-    exit;
+    $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications']);
 
     foreach ($user_applications as $user_application) {
         $client = sql_select('clients', 'redirect_url,user_id,name,logo_url,description,suspended', "client_id='{$user_application}'", true);
