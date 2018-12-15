@@ -85,14 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applicat
 
     //add client_id to user apps
     if (!in_array($client_id, $user_applications)) {
-        error_log('Client_ID_0:  ' . $client_id);
-        error_log('Apps_0:  ' . $user_applications);
-
         array_push($user_applications, $client_id);
         $user_applications = json_encode($user_applications);
-
-        error_log('Client_ID_1:  ' . $client_id);
-        error_log('Apps_2:  ' . $user_applications);
 
         $query =
             "UPDATE
