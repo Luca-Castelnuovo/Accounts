@@ -43,6 +43,9 @@ if (empty($scopes)) {
 // Query user
 $user = sql_select('users', 'id,username,picture_url,applications', "id='{$_SESSION['id']}'", true);
 $user_applications = json_decode($user['applications']);
+if (!is_array($user_applications)) {
+    $user_applications = [];
+}
 
 // Create authorization_token
 if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applications)) {
