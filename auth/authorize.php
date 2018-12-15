@@ -87,7 +87,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applicat
     if (!in_array($client_id, $user_applications)) {
         array_push($user_applications, $client_id);
         $user_applications = json_encode($user_applications);
-        sql_update('users', ['applications' => $user_applications], "id='{$user['id']}'");
+        $query =
+            "UPDATE
+                users
+            SET
+                applications='{$user_applications}'
+            WHERE
+                id='{$user['id']}'";
+
+        sql_query($query, false);
     }
 
     // Redirect user with authorization_code
