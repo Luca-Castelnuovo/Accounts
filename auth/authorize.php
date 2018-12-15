@@ -41,19 +41,28 @@ if (empty($scopes)) {
 }
 
 // Query user
-$user = sql_select('users', 'id,username,picture_url', "id='{$_SESSION['id']}'", true);
+$user = sql_select('users', 'id,username,picture_url,applications', "id='{$_SESSION['id']}'", true);
+$user_applications = json_decode($user['applications']);
+
+//if client_id is in applications don't require conformation
+if (in_array($client_id, $user_applications)) {
+    //continue token creation
+}
+
 
 // Create authorization_token
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $CSRFtoken = check_data($_POST['CSRFtoken'], true, 'CSRF token', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
-    $recaptcha_response = check_data($_POST['g-recaptcha-response'], true, 'Recaptcha response', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
+if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applications)) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $CSRFtoken = check_data($_POST['CSRFtoken'], true, 'CSRF token', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
+        $recaptcha_response = check_data($_POST['g-recaptcha-response'], true, 'Recaptcha response', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
 
-    // Recpatcha validation
-    $url = "https://www.google.com/recaptcha/api/siteverify?secret={$GLOBALS['config']->recaptcha->secret_key}&response={$recaptcha_response}";
-    $response = json_decode(file_get_contents($url));
+        // Recpatcha validation
+        $url = "https://www.google.com/recaptcha/api/siteverify?secret={$GLOBALS['config']->recaptcha->secret_key}&response={$recaptcha_response}";
+        $response = json_decode(file_get_contents($url));
 
-    if (!$response->success) {
-        redirect("/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}", 'Please try again.');
+        if (!$response->success) {
+            redirect("/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}", 'Please try again.');
+        }
     }
 
     // Create authorization token
@@ -79,6 +88,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             '{$state}');";
 
     sql_query($query, false);
+
+    //add client_id to user apps
+    if (!in_array($client_id, $user_applications)) {
+        array_push($user_applications, $client_id);
+        $user_applications = json_encode($user_applications);
+        sql_update('users', ['applications' => $user_applications], "id='{$user['id']}'");
+    }
 
     // Redirect user with authorization_code
     if (strpos($return_to, 'http://') === false && strpos($return_to, 'https://') === false) {

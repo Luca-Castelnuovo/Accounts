@@ -16,12 +16,12 @@ function page_header($title = 'Unknown')
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff9800">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#2962FF">
     </head>
 
     <body>
         <nav>
-            <div class="nav-wrapper orange">
+            <div class="nav-wrapper blue accent-4">
                 <a href="/home" class="brand-logo" style="padding-left: 15px">{$title}</a>
                 <a href="#" data-target="sidenav" class="right sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
@@ -37,13 +37,15 @@ function page_header($title = 'Unknown')
                 <li><a href="/?logout">Logout</a></li>
             </ul>
         </nav>
-        <div class="container">
+        <div class="section">
+            <div class="container">
 HTML;
 }
 
 function page_footer()
 {
     echo <<<HTML
+            </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="/js/init.js"></script>
