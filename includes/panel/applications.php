@@ -13,8 +13,10 @@ function applications_list($user_id)
 
         echo <<<HTML
         <li class="collection-item avatar">
-            <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$user_application}.png'"> <span class="title">{$client['name']}</span>
-            <p>Owned by <span class="blue-text">{$owner['username']}</span></p>
+            <a href="?application={$user_application}">
+                <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$user_application}.png'"> <span class="title">{$client['name']}</span>
+                <p>Owned by <span class="blue-text">{$owner['username']}</span></p>
+            </a>
         </li>
 HTML;
     }
@@ -24,7 +26,12 @@ HTML;
 
 function application_info($client_id)
 {
-    //
+    $client = clean_data($client_id);
+    $client = sql_select('clients', 'redirect_url,user_id,name,logo_url,description,suspended', "client_id='{$user_application}'", true);
+
+    echo <<<HTML
+    <h4>{$client['name']}</h4>
+HTML;
 }
 
 function application_revoke($client_id, $CSRFtoken)
