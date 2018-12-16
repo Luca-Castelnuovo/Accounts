@@ -42,13 +42,20 @@ if (empty($scopes)) {
 
 // Query user
 $user = sql_select('users', 'id,username,picture_url,applications', "id='{$_SESSION['id']}'", true);
-$user_applications = json_decode($user['applications']);
+$user_applications = json_decode($user['applications'], true);
 if (!is_array($user_applications)) {
     $user_applications = [];
 }
 
 // Create authorization_token
-if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applications)) {
+if (array_key_exists($client_id, $user_applications) && $user_applications[$client_id] == $scope_array) {
+    $user_application_match = true;
+} else {
+    $user_application_match = false;
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $CSRFtoken = check_data($_POST['CSRFtoken'], true, 'CSRF token', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
         $recaptcha_response = check_data($_POST['g-recaptcha-response'], true, 'Recaptcha response', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
@@ -77,9 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applicat
     ]);
 
     //add client_id to user apps
-    if (!in_array($client_id, $user_applications)) {
-        $new_applications = [$client_id => $scope_array];
-        $user_applications = json_encode($user_applications + $new_applications);
+    if (!array_key_exists($client_id, $user_applications) || $user_applications[$client_id] != $scope_array) {
+        $unique_scopes = array_diff($user_applications, $scope_array);
+        $user_applications = json_encode($unique_scopes);
 
         sql_update('users', ['applications' => $user_applications], "id='{$user['id']}'");
     }
