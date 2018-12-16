@@ -88,10 +88,7 @@ function application_revoke($user_id, $client_id, $CSRFtoken)
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
     if (array_key_exists($client_id, $user_applications)) {
-        $index = array_search($client_id, $user_applications);
-        if ($index !== false) {
-            unset($user_applications[$index]);
-        }
+        unset($user_applications[$client_id]);
 
         $user_applications = json_encode($user_applications);
 
