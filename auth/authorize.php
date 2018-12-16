@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
     ]);
 
     //add client_id to user apps (http://sandbox.onlinephpfunctions.com/code/290eb12087de69c3f08d7be132c3100123a75e81)
-    if (!array_key_exists($client_id, $user_applications) || $user_applications[$client_id] != $scope_array) {
+    if (!array_key_exists($client_id, $user_applications) || !$user_application_match) {
         // Remove duplicate scope
         $unique_scope_db = array_diff($user_applications[$client_id], $scope_array);
         $unique_scope_request = array_diff($scope_array, $user_applications[$client_id]);
