@@ -76,21 +76,15 @@ function application_revoke($user_id, $client_id, $CSRFtoken)
 
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications']);
 
-    print_r($user_applications);
-
     if (in_array($client_id, $user_applications)) {
         $index = array_search($client_id, $user_applications);
         if ($index !== false) {
             unset($user_applications[$index]);
         }
 
-        print_r($user_applications);
-
         $user_applications = json_encode($user_applications);
 
-        print_r($user_applications);
-
-        sql_update('users', ['applications' => $user_applications], 'user_id=' . $user_id);
+        sql_update('users', ['applications' => $user_applications], 'id=' . $user_id);
     }
 
     sql_delete('authorization_codes', "client_id='{$client_idAND}' user_id='{$user_id}'");
