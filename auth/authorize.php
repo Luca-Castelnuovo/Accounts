@@ -85,8 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
 
     //add client_id to user apps
     if (!array_key_exists($client_id, $user_applications) || $user_applications[$client_id] != $scope_array) {
-        $unique_scopes = array_diff($user_applications, $scope_array);
-        $user_applications = json_encode($unique_scopes);
+        $unique_scopes = array_diff($user_applications[$client_id], $scope_array);
+        unset($user_applications[$client_id]);
+        $user_applications = json_encode($user_applications + $unique_scopes);
 
         sql_update('users', ['applications' => $user_applications], "id='{$user['id']}'");
     }
