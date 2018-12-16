@@ -93,7 +93,7 @@ function application_revoke($user_id, $client_id, $CSRFtoken)
         sql_update('users', ['applications' => $user_applications], 'user_id=' . $user_id);
     }
 
-    sql_delete('authorization_codes', 'client_id=' . $client_id . 'AND user_id=' . $user_id);
+    sql_delete('authorization_codes', "client_id='{$client_idAND}' user_id='{$user_id}'");
 
-    sql_delete('access_tokens', 'client_id=' . $client_id . 'AND user_id=' . $user_id);
+    sql_delete('access_tokens', "client_id='{$client_idAND}' user_id='{$user_id}'");
 }
