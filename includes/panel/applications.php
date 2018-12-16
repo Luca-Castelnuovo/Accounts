@@ -11,6 +11,8 @@ function applications_list($user_id)
         $client = sql_select('clients', 'redirect_url,user_id,name,logo_url,description,suspended', "client_id='{$user_application}'", true);
         $owner = sql_select('users', 'username', "id='{$client['user_id']}'", true);
 
+        print_r($user_application);
+
         echo <<<HTML
         <li class="collection-item avatar">
             <a href="?application={$user_application}">
