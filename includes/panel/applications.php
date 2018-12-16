@@ -5,9 +5,7 @@ function applications_list($user_id)
     echo '<style>.collection .collection-item.avatar{min-height:0;}</style>';
     echo '<ul class="collection">';
 
-    $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications']);
-
-    print_r($user_applications);
+    $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
     foreach ($user_applications as $user_application) {
         $client = sql_select('clients', 'redirect_url,user_id,name,logo_url,description,suspended', "client_id='{$user_application}'", true);
