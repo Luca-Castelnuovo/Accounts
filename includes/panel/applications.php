@@ -7,18 +7,14 @@ function applications_list($user_id)
 
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
-    print_r($user_applications);
-
-    foreach ($user_applications as $user_application) {
+    foreach ($user_applications as $client_id => $scope) {
         $client = sql_select('clients', 'redirect_url,user_id,name,logo_url,description,suspended', "client_id='{$user_application}'", true);
         $owner = sql_select('users', 'username', "id='{$client['user_id']}'", true);
 
-        print_r($user_application);
-
         echo <<<HTML
         <li class="collection-item avatar">
-            <a href="?application={$user_application}">
-                <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$user_application}.png'"> <span class="title">{$client['name']}</span>
+            <a href="?application={$client_id}">
+                <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client_id}.png'"> <span class="title">{$client['name']}</span>
             </a>
                 <p>Owned by <span class="blue-text">{$owner['username']}</span></p>
         </li>
@@ -82,7 +78,7 @@ function application_list_scopes($user_id, $client_id)
 {
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications']);
 
-    foreach ($user_applications[$client_id] as $scope) {
+    foreach ($user_applications[$client_id] as $client_id => $scope) {
         $scope_data = sql_select('scopes', 'title,description', "scope='{$scope}'", true);
         echo <<<HTML
         <li>
