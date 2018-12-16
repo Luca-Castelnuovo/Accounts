@@ -3,17 +3,17 @@
 function loggedin()
 {
     if (!$_SESSION['logged_in']) {
-        redirect('/?reset&return_to=' . url_encode($_SERVER['REQUEST_URI']), 'Please login');
+        redirect('/?reset&return_to=' . url_encode($GLOBALS['config']->app->url . $_SERVER['REQUEST_URI']), 'Please login');
     }
 
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
-        redirect('/?reset&return_to=' . url_encode($_SERVER['REQUEST_URI']), 'Please login');
+        redirect('/?reset&return_to=' . url_encode($GLOBALS['config']->app->url . $_SERVER['REQUEST_URI']), 'Please login');
     } else {
         $_SESSION['LAST_ACTIVITY'] = time();
     }
 
     if ($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
-        redirect('/?reset&return_to=' . url_encode($_SERVER['REQUEST_URI']), 'Please login');
+        redirect('/?reset&return_to=' . url_encode($GLOBALS['config']->app->url . $_SERVER['REQUEST_URI']), 'Please login');
     }
 }
 
