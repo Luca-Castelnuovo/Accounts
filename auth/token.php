@@ -38,22 +38,13 @@ if (isset($authorization_code_sql['state']) && !empty($authorization_code_sql['s
 $access_token = gen($GLOBALS['config']->auth->length->access_token);
 $expires = time() + $GLOBALS['config']->auth->expires->access_token;
 
-$query =
-    "INSERT INTO
-        access_tokens
-            (access_token,
-            client_id,
-            user_id,
-            expires,
-            scope)
-    VALUES
-        ('{$access_token}',
-        '{$authorization_code_sql['client_id']}',
-        '{$authorization_code_sql['user_id']}',
-        '{$expires}',
-        '{$authorization_code_sql['scope']}');";
-
-sql_query($query, false);
+sql_insert('access_tokens', [
+    'access_token' => $access_token,
+    'client_id' => $authorization_code_sql['client_id'],
+    'user_id' => $authorization_code_sql['user_id'],
+    'expires' => $expires,
+    'scope' => $authorization_code_sql['scope'],
+]);
 
 $token_id = sql_select('access_tokens', 'id', "access_token='{$access_token}'", true)['id'];
 

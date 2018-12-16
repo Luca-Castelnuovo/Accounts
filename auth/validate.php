@@ -12,4 +12,11 @@ if ($access['expires'] <= time()) {
     response(false, 'bad_access_token');
 }
 
+
+// Return headers
+header('X-RateLimit-Limit: 120');
+header('X-RateLimit-Remaining: 110');
+header('X-RateLimit-Reset: 1544951231');
+
+//Return json
 response(true, 'access_token_valid', ['client_id' => $access['client_id'], 'user_id' => $access['user_id'], 'expires' => $access['expires'], 'scope'=> json_decode($access['scope'])]);

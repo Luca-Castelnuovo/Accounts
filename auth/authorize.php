@@ -67,39 +67,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applicat
     $expires = time() + $GLOBALS['config']->auth->expires->authorization_code;
     $scope_sql = json_encode($scope_array);
 
-    $query =
-        "INSERT INTO
-            authorization_codes
-                (authorization_code,
-                client_id,
-                user_id,
-                expires,
-                scope,
-                state)
-        VALUES
-            ('{$authorization_code}',
-            '{$client_id}',
-            '{$user['id']}',
-            '{$expires}',
-            '{$scope_sql}',
-            '{$state}');";
-
-    sql_query($query, false);
+    sql_insert('authorization_codes', [
+        'authorization_code' => $authorization_code,
+        'client_id' => $client_id,
+        'user_id' => $user['id'],
+        'expires' => $expires,
+        'scope' => $scope_sql,
+        'state' => $state,
+    ]);
 
     //add client_id to user apps
     if (!in_array($client_id, $user_applications)) {
         array_push($user_applications, $client_id);
         $user_applications = json_encode($user_applications);
 
-        $query =
-            "UPDATE
-                users
-            SET
-                applications='{$user_applications}'
-            WHERE
-                id='{$user['id']}'";
-
-        sql_query($query, false);
+        sql_update('users', ['applications' => $user_applications], "id='{$user['id']}'");
     }
 
     // Redirect user with authorization_code
