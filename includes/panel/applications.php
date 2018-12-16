@@ -24,12 +24,17 @@ HTML;
     echo '</ul>';
 }
 
-function application_info($client_id)
+
+function application_info($user_id, $client_id)
 {
     $client = clean_data($client_id);
     $client = sql_select('clients', 'redirect_url,user_id,name,logo_url,description,suspended', "client_id='{$client_id}'", true);
 
     $CSRFtoken = csrf_gen();
+
+    $callFunction = function ($function) {
+        return $function;
+    };
 
     echo <<<HTML
     <style>
@@ -59,9 +64,7 @@ function application_info($client_id)
     </div>
     <div class="row">
         <ul class="browser-default">
-            <li>get scopes</li>
-            <li>query scopes</li>
-            <li>display description</li>
+            {$callFunction(application_list_scopes($user_id, $client_id))}
         </ul>
     </div>
     <div class="row">
@@ -69,6 +72,23 @@ function application_info($client_id)
     </div>
 HTML;
 }
+
+
+function application_list_scopes($user_id, $client_id)
+{
+    $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications']);
+
+    foreach ($user_applications[$client_id] as $scope) {
+        $scope_data = sql_select('scopes', 'title,description', "scope='{$scope}'", true);
+        echo <<<HTML
+        <li>
+            <p><b>{$scope_data['title']}</b></p>
+            <p>{$scope_data['description']}</p>
+        </li>
+HTML;
+    }
+}
+
 
 function application_revoke($user_id, $client_id, $CSRFtoken)
 {

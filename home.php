@@ -16,7 +16,7 @@ if (isset($_GET['revoke']) && !empty($_GET['revoke']) && isset($_GET['CSRFtoken'
 if (isset($_GET['application']) && !empty($_GET['application'])) {
     ?>
     <div class="row">
-        <?= application_info($_GET['application']); ?>
+        <?= application_info($_SESSION['id'], $_GET['application']); ?>
     </div>
 <?php
 } else {
