@@ -32,10 +32,6 @@ function application_info($user_id, $client_id)
 
     $CSRFtoken = csrf_gen();
 
-    $callFunction = function ($function) {
-        return $function;
-    };
-
     echo <<<HTML
     <style>
         .mb-0{margin-bottom:0}
@@ -64,18 +60,7 @@ function application_info($user_id, $client_id)
     </div>
     <div class="row">
         <ul class="browser-default">
-            {$callFunction(application_list_scopes($user_id, $client_id))}
-        </ul>
-    </div>
-    <div class="row">
-        <a href="/home"><i class="material-icons">arrow_back</i> Go back</a>
-    </div>
 HTML;
-}
-
-
-function application_list_scopes($user_id, $client_id)
-{
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
     foreach ($user_applications[$client_id] as $client_id => $scope) {
@@ -87,6 +72,13 @@ function application_list_scopes($user_id, $client_id)
         </li>
 HTML;
     }
+    echo <<<HTML
+        </ul>
+    </div>
+    <div class="row">
+        <a href="/home"><i class="material-icons">arrow_back</i> Go back</a>
+    </div>
+HTML;
 }
 
 
