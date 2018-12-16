@@ -83,12 +83,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
         'state' => $state,
     ]);
 
-    //add client_id to user apps
+    //add client_id to user apps (http://sandbox.onlinephpfunctions.com/code/8553686c12ea76c7ab009ff31b9c167ce66d5e69)
     if (!array_key_exists($client_id, $user_applications) || $user_applications[$client_id] != $scope_array) {
-        $unique_scopes = array_diff($user_applications[$client_id], $scope_array);
-        unset($user_applications[$client_id]);
-        $user_applications = json_encode($user_applications + $unique_scopes);
+        // Remove duplicate scope
+        $unique_scope_db = array_diff($user_applications[$client_id], $scope_array);
+        $unique_scope_request = array_diff($scope_array, $user_applications[$client_id]);
+        $unique_scopes = array_merge($unique_scope_db, $unique_scope_request);
 
+        // Remove the old scope for client_id
+        unset($user_applications[$client_id]);
+
+        // Turn new scopes into assoc array
+        $unique_scopes_assoc = [$client_id => $unique_scopes];
+
+        // Merge other clients with current client
+        $user_applications = json_encode($user_applications + $unique_scopes_assoc);
+
+        // Update user
         sql_update('users', ['applications' => $user_applications], "id='{$user['id']}'");
     }
 
