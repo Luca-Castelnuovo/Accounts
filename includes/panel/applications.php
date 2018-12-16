@@ -76,7 +76,7 @@ HTML;
 
 function application_list_scopes($user_id, $client_id)
 {
-    $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications']);
+    $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
     foreach ($user_applications[$client_id] as $client_id => $scope) {
         $scope_data = sql_select('scopes', 'title,description', "scope='{$scope}'", true);
