@@ -63,7 +63,7 @@ function application_info($user_id, $client_id)
 HTML;
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
-    foreach ($user_applications[$client_id] as $client_id => $scopes) {
+    foreach ($user_applications[$client_id] as $client_id => $scope) {
         $scope_data = sql_select('scopes', 'title,description', "scope='{$scope}'", true);
         echo <<<HTML
         <li>
