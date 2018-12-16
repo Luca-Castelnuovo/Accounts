@@ -87,7 +87,7 @@ function application_revoke($user_id, $client_id, $CSRFtoken)
 
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications']);
 
-    if (in_array($client_id, $user_applications)) {
+    if (array_key_exists($client_id, $user_applications)) {
         $index = array_search($client_id, $user_applications);
         if ($index !== false) {
             unset($user_applications[$index]);
@@ -96,9 +96,13 @@ function application_revoke($user_id, $client_id, $CSRFtoken)
         $user_applications = json_encode($user_applications);
 
         sql_update('users', ['applications' => $user_applications], "id='{$user_id}'");
+
+        sql_delete('authorization_codes', "client_id='{$client_idAND}' user_id='{$user_id}'");
+
+        sql_delete('access_tokens', "client_id='{$client_idAND}' user_id='{$user_id}'");
+
+        redirect('/home', 'Application revoked.');
+    } else {
+        redirect('/home', 'Application doen\'t exist.');
     }
-
-    sql_delete('authorization_codes', "client_id='{$client_idAND}' user_id='{$user_id}'");
-
-    sql_delete('access_tokens', "client_id='{$client_idAND}' user_id='{$user_id}'");
 }
