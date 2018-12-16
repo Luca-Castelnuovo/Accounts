@@ -49,6 +49,8 @@ if (!is_array($user_applications)) {
 
 // Create authorization_token
 $scope_intersect = array_values(array_intersect($user_applications[$client_id], $scope_array));
+sort($scope_intersect);
+sort($scope_array);
 if (array_key_exists($client_id, $user_applications) && $scope_intersect == $scope_array) {
     $user_application_match = true;
 } else {
