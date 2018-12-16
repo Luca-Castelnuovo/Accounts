@@ -63,7 +63,13 @@ function application_info($user_id, $client_id)
 HTML;
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
+    $user_has_authorized = false;
+
     foreach ($user_applications[$client_id] as $client_id => $scope) {
+        if (!empty($scope)) {
+            $user_has_authorized = true;
+        }
+
         $scope_data = sql_select('scopes', 'title,description', "scope='{$scope}'", true);
         echo <<<HTML
         <li>
@@ -71,6 +77,11 @@ HTML;
         </li>
 HTML;
     }
+
+    if (!$user_has_authorized) {
+        redirect('/home', 'Application doen\'t have access to your account.');
+    }
+
     echo <<<HTML
         </ul>
     </div>
@@ -100,6 +111,6 @@ function application_revoke($user_id, $client_id, $CSRFtoken)
 
         redirect('/home', 'Application revoked.');
     } else {
-        redirect('/home', 'Application doen\'t exist.');
+        redirect('/home', 'Application doen\'t have access to your account.');
     }
 }
