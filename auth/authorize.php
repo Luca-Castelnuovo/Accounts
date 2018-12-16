@@ -78,9 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || in_array($client_id, $user_applicat
 
     //add client_id to user apps
     if (!in_array($client_id, $user_applications)) {
-        array_push($user_applications, $client_id);
-        $user_applications = json_encode($user_applications);
-
+        $new_applications = [$client_id=>$scope_array];
+        $user_applications = json_encode(array_merge($user_applications, $new_applications));
         sql_update('users', ['applications' => $user_applications], "id='{$user['id']}'");
     }
 
