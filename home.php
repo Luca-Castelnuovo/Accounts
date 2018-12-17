@@ -17,7 +17,7 @@ page_header('Home');
         <div class="col s12 m9">
             <h4>Your clients</h4>
         </div>
-        <div class="col s12 m9">
+        <div class="col s12 m3">
             <a href="/client/add" class="btn-large waves-effect blue accent-4">Create client</a>
         </div>
     </div>
