@@ -140,9 +140,19 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
                             <button class="col s12 btn waves-effect blue accent-4" type="submit">Login</button>
                         </div>
                     </div>
-                    <a href="/register" class="left">Register</a>
-                    <a href="/forgot" class="right">Forgot Password</a>
                 </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m8 offset-m2 l4 offset-l4">
+                <div class="card-panel">
+                    <div class="col s12 m6">
+                        <a href="/user/register" class="left">Register</a>
+                    </div>
+                    <div class="col s12 m6">
+                        <a href="/user/forgot" class="right">Forgot Password</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
