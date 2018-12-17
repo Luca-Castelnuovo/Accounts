@@ -50,17 +50,19 @@ function client_info($user_id, $client_id)
     <div class="row">
         <div class="noform">
             <div class="row">
-                <div class="input-field col s12 m6">
+                <div class="input-field col s12">
                     <label for="client_id">Client ID</label>
-                    <input type="text" id="client_id" value="{$client['client_id']}" />
-                </div>
-                <div class="input-field col s12 m6">
-                    <label for="client_secret">Client Secret</label>
-                    <input type="text" id="client_secret" value="{$client['client_id']}"/>
+                    <input type="text" id="client_id" value="{$client['client_id']}" readonly />
                 </div>
             </div>
             <div class="row">
-                <a href="?reset={$client_id}&CSRFtoken={$CSRFtoken}" class="btn-small waves-effect red accent-4" onclick="return confirm('Are you sure?')">Reset client secret</a>
+                <div class="input-field col s12 m9">
+                    <label for="client_secret">Client Secret</label>
+                    <input type="text" id="client_secret" value="{$client['client_secret']}" readonly />
+                </div>
+                <div class="col s12 m3">
+                    <a href="?reset={$client_id}&CSRFtoken={$CSRFtoken}" class="btn waves-effect red accent-4" onclick="return confirm('Are you sure?')">Reset client secret</a>
+                </div>
             </div>
         </div>
         <form method="post">
