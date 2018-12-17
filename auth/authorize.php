@@ -63,6 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
         $CSRFtoken = check_data($_POST['CSRFtoken'], true, 'CSRF token', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
         $recaptcha_response = check_data($_POST['g-recaptcha-response'], true, 'Recaptcha response', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
 
+        // Validate csrftoken
+        csrf_val($CSRFtoken);
+
         // Recpatcha validation
         $url = "https://www.google.com/recaptcha/api/siteverify?secret={$GLOBALS['config']->recaptcha->secret_key}&response={$recaptcha_response}";
         $response = json_decode(file_get_contents($url));
