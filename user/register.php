@@ -2,6 +2,10 @@
 
 require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+    redirect('/home');
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     user_register($_POST['CSRFtoken'], $_POST['username'], $_POST['password'], $_POST['password_confirm'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['picture_url']);
 }
