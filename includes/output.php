@@ -47,7 +47,8 @@ function redirect($to, $alert = null)
 function send_mail($to, $subject, $body)
 {
     // $access_token = access_token();
-    request('https://api.lucacastelnuovo.nl/mail/', ["access_token" => "{$access_token}", "to" => "{$to}", "subject" => "{$subject}", "from_name" => "LTC Auth", "body" => "{$body}"]);
+    $access_token = '1234';
+    return request('https://api.lucacastelnuovo.nl/mail/', ["access_token" => "{$access_token}", "to" => "{$to}", "subject" => "{$subject}", "body" => "{$body}", "from_name" => "LTC Auth"]);
 }
 
 
