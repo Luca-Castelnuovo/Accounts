@@ -21,7 +21,7 @@ if (isset($state) && !empty($state)) {
 }
 
 // Query client
-$client = sql_select('clients', 'id,redirect_url,name,logo_url,description', "client_id='{$client_id}'", true);
+$client = sql_select('clients', 'id,redirect_uri,name,logo_url,description', "client_id='{$client_id}'", true);
 
 // Validate client exists
 if (!isset($client['id']) || empty($client['id'])) {
@@ -30,7 +30,7 @@ if (!isset($client['id']) || empty($client['id'])) {
 
 // If not isset callback use default callback
 if (empty($redirect_uri)) {
-    $redirect_uri = $client['redirect_url'];
+    $redirect_uri = $client['redirect_uri'];
 }
 
 // List scopes
