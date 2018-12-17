@@ -5,7 +5,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 loggedin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    user_update($_POST['CSRFtoken'], $_SESSION['id'], $_POST['username'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['picture_url'], $_POST['password'], $_POST['password_confirm']);
+    user_update($_POST['CSRFtoken'], $_SESSION['id'], $_POST['username'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['picture_url'], $_POST['password'], $_POST['password_confirm'], $_POST['new_password_confirm']);
 }
 
 $user = sql_select('users', 'first_name,last_name,email,username,picture_url', "id='{$_SESSION['id']}'", true);
@@ -73,12 +73,12 @@ page_header('Settings');
             </div>
             <div class="row">
                 <div class="input-field col s12 m6">
-                    <label for="password">New Password</label>
-                    <input type="password" id="password" name="password" />
+                    <label for="password_confirm">New Password</label>
+                    <input type="password" id="password_confirm" name="password_confirm" />
                 </div>
                 <div class="input-field col s12 m6">
-                    <label for="password_confirm">Confirm New Password</label>
-                    <input type="password" id="password_confirm" name="password_confirm" />
+                    <label for="new_password_confirm">Confirm New Password</label>
+                    <input type="password" id="new_password_confirm" name="new_password_confirm" />
                 </div>
             </div>
 
