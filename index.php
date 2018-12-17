@@ -96,12 +96,16 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
         .input-field input:focus {
             border-bottom: 1px solid #2962FF !important;
             box-shadow: 0 1px 0 0 #2962FF !important;
-       }
+        }
 
-       [type="checkbox"].filled-in:checked + span:not(.lever):after {
+        [type="checkbox"].filled-in:checked + span:not(.lever):after {
            border: 2px solid #2962FF !important;
            background-color: #2962FF !important;
-       }
+        }
+
+        .p-0 {
+           padding: 0;
+        }
     </style>
 </head>
 
@@ -144,8 +148,8 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
             </div>
         </div>
         <div class="row">
-            <div class="col s12 m8 offset-m2 l4 offset-l4">
-                <div class="card-panel">
+            <div class="col s12">
+                <div class="card-panel p-0">
                     <div class="col s12 m6">
                         <a href="/user/register" class="left">Register</a>
                     </div>

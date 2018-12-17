@@ -32,12 +32,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .input-field input:focus {
             border-bottom: 1px solid #2962FF !important;
             box-shadow: 0 1px 0 0 #2962FF !important;
-       }
+        }
 
-       [type="checkbox"].filled-in:checked + span:not(.lever):after {
+        [type="checkbox"].filled-in:checked + span:not(.lever):after {
            border: 2px solid #2962FF !important;
            background-color: #2962FF !important;
-       }
+        }
+
+        .p-0 {
+          padding: 0;
+        }
     </style>
 </head>
 
@@ -97,6 +101,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="/register" class="left">Register</a>
                     <a href="/forgot" class="right">Forgot Password</a>
                 </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="card-panel p-0">
+                    <div class="col s12 m6">
+                        <a href="/" class="left">Login</a>
+                    </div>
+                    <div class="col s12 m6">
+                        <a href="/user/forgot" class="right">Forgot Password</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
