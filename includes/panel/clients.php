@@ -69,26 +69,26 @@ function client_info($user_id, $client_id)
         <form method="post">
             <div class="row">
                 <div class="input-field col s12">
-                    <label for="logo_url">Logo URL</label>
-                    <input type="text" id="logo_url" name="logo_url" required value="{$client['logo_url']}"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
                     <label for="name">Client name</label>
                     <input type="text" id="name" name="name" required value="{$client['name']}"/>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <label for="description">Description</label>
-                    <input type="text" id="description" name="description" required value="{$client['description']}"/>
+                    <label for="redirect_uri">Redirect URI</label>
+                    <input type="text" id="redirect_uri" name="redirect_uri" required value="{$client['redirect_uri']}"/>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <label for="redirect_uri">Redirect URI</label>
-                    <input type="text" id="redirect_uri" name="redirect_uri" required value="{$client['redirect_uri']}"/>
+                    <label for="logo_url">Logo URL</label>
+                    <input type="text" id="logo_url" name="logo_url" value="{$client['logo_url']}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" value="{$client['description']}"/>
                 </div>
             </div>
 
