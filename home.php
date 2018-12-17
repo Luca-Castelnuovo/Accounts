@@ -18,7 +18,7 @@ page_header('Home');
             <h4>Your clients</h4>
         </div>
         <div class="col s12 m3">
-            <a href="/client/add" class="btn-large waves-effect blue accent-4">Create client</a>
+            <a href="/client/add" class="btn waves-effect blue accent-4">Create client</a>
         </div>
     </div>
     <?= clients_list($_SESSION['id']); ?>
