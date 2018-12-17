@@ -29,9 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="manifest" href="/site.webmanifest">
 
     <style>
-        .input-field input:focus + label {
-            color: #2962FF !important;
-        }
+        .input-field input:focus + label {color: #2962FF !important;}
 
         .input-field input:focus {
             border-bottom: 1px solid #2962FF !important;
@@ -43,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
            background-color: #2962FF !important;
         }
 
-        .p-0 {
-          padding: 0;
-        }
+        .p-0 {padding: 0;}
+        .progress {background-color: #94b0ff;}
+        .progress .indeterminate {background-color: #2962FF;}
     </style>
 </head>
 
