@@ -107,7 +107,7 @@ HTML;
                         <div class="col s12">
                             <input type="hidden" name="CSRFtoken" value="<?= csrf_gen() ?>"/>
                             <input id="recaptchaResponse" type="hidden" name="g-recaptcha-response" value="null">
-                            <button id="submitBtn" class="col s12 btn-large waves-effect blue accent-4" type="submit">Request new password</button>
+                            <button id="submitBtn" class="col s12 btn waves-effect blue accent-4" type="submit">Request new password</button>
                         </div>
                     </div>
                 </form>
