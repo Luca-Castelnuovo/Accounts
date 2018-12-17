@@ -7,7 +7,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    user_register($_POST['CSRFtoken'], $_POST['username'], $_POST['password'], $_POST['password_confirm'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['picture_url']);
+    user_register($_POST['CSRFtoken'], $_POST['g-recaptcha-response'], $_POST['username'], $_POST['password'], $_POST['password_confirm'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['picture_url']);
 }
 
 ?>
@@ -97,9 +97,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                     <div class="row">
+                        <div id="loaderContainer" class="progress">
+                            <div class="indeterminate"></div>
+                        </div>
                         <div class="col s12">
                             <input type="hidden" name="CSRFtoken" value="<?= csrf_gen() ?>"/>
-                            <button class="col s12 btn waves-effect blue accent-4" type="submit">Register</button>
+                            <input id="recaptchaResponse" type="hidden" name="g-recaptcha-response" value="null">
+                            <button id="submitBtn" class="col s12 btn waves-effect blue accent-4" type="submit">Register</button>
                         </div>
                     </div>
                 </form>
@@ -120,6 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeuWIEUAAAAAF6aZy05cC5uNot2veX4IbsBxjza"></script>
+    <script src="/js/settings.js"></script>
     <?= alert_display() ?>
 </body>
 

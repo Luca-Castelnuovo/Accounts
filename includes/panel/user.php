@@ -1,8 +1,16 @@
 <?php
 
-function user_register($CSRFtoken, $username, $password, $password_confirm, $first_name, $last_name, $email, $picture_url)
+function user_register($CSRFtoken, $recaptcha_response, $username, $password, $password_confirm, $first_name, $last_name, $email, $picture_url)
 {
     csrf_val($CSRFtoken);
+
+    $recaptcha_response = check_data($recaptcha_response, true, 'Username', true, true, '/user/register');
+    $url = "https://www.google.com/recaptcha/api/siteverify?secret={$GLOBALS['config']->recaptcha->secret_key}&response={$recaptcha_response}";
+    $response = json_decode(file_get_contents($url));
+
+    if (!$response->success) {
+        redirect('/user/register', 'Please try again.');
+    }
 
     $username = check_data($username, true, 'Username', true, true, '/user/register');
     $password = check_data($password, true, 'Password', true, true, '/user/register');
