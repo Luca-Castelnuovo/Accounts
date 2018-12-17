@@ -57,9 +57,6 @@ function user_update($CSRFtoken, $user_id, $username, $password, $new_password, 
     csrf_val($CSRFtoken);
 
     $username = check_data($username, true, 'Username', true, true, '/user/register');
-    $password = check_data($password, true, 'Password', true, true, '/user/register');
-    $new_password = check_data($new_password, true, 'Password Confirm', true, true, '/user/register');
-    $new_password_confirm = check_data($new_password_confirm, true, 'Password Confirm', true, true, '/user/register');
     $first_name = check_data($first_name, true, 'First Name', true, true, '/user/register');
     $last_name = check_data($last_name, true, 'Last Name', true, true, '/user/register');
     $email = check_data($email, true, 'Email', true, true, '/user/register');
@@ -89,26 +86,27 @@ function user_update($CSRFtoken, $user_id, $username, $password, $new_password, 
     }
 
     // Check if user wants to update password
-    if ($new_password === $new_password_confirm) {
-        $new_password = password_hash($new_password, PASSWORD_BCRYPT);
+    if (!empty($password)) {
+        $password = check_data($password, true, 'Old Password', true, true, '/user/register');
+        $new_password = check_data($new_password, true, 'New Password', true, true, '/user/register');
+        $new_password_confirm = check_data($new_password_confirm, true, 'New Password Confirm', true, true, '/user/register');
 
-        sql_update('users', [
-            'username' => $username,
-            'password' => $new_password,
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'email' => $email,
-            'picture_url' => $picture_url,
-        ], "id='{$user_id}'");
-    } else {
-        sql_update('users', [
-            'username' => $username,
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'email' => $email,
-            'picture_url' => $picture_url,
-        ], "id='{$user_id}'");
+        if ($new_password === $new_password_confirm) {
+            $new_password = password_hash($new_password, PASSWORD_BCRYPT);
+
+            sql_update('users', [
+                'password' => $new_password
+            ], "id='{$user_id}'");
+        }
     }
+
+    sql_update('users', [
+        'username' => $username,
+        'first_name' => $first_name,
+        'last_name' => $last_name,
+        'email' => $email,
+        'picture_url' => $picture_url,
+    ], "id='{$user_id}'");
 
     redirect('/user/register', 'Account updated.');
 }
