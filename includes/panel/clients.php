@@ -5,13 +5,13 @@ function clients_list($user_id)
     echo '<ul class="collection">';
 
     $user_id = clean_data($user_id);
-    $clients = sql_select('clients', 'name,logo_url,description', "user_id='{$user_id}'", false);
+    $clients = sql_select('clients', 'client_id,name,logo_url,description', "user_id='{$user_id}'", false);
 
     while ($client = $clients->fetch_assoc()) {
         echo <<<HTML
         <li class="collection-item avatar">
-            <a href="/client?id={$client_id}">
-                <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client_id}.png'"> <span class="title">{$client['name']}</span>
+            <a href="/client?id={$client['client_id']}">
+                <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client['client_id']}.png'"> <span class="title">{$client['name']}</span>
             </a>
             <p>{$client['description']}</p>
         </li>
