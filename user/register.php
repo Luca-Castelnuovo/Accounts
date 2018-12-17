@@ -95,10 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                     <div class="row">
-                        <div id="loaderContainer" class="progress">
-                            <div class="indeterminate"></div>
-                        </div>
                         <div class="col s12">
+                            <div id="loaderContainer" class="progress">
+                                <div class="indeterminate"></div>
+                            </div>
+
                             <input type="hidden" name="CSRFtoken" value="<?= csrf_gen() ?>"/>
                             <input id="recaptchaResponse" type="hidden" name="g-recaptcha-response" value="null">
                             <button id="submitBtn" class="col s12 btn waves-effect blue accent-4" type="submit">Register</button>
