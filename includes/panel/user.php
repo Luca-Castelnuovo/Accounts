@@ -56,18 +56,13 @@ function user_update($CSRFtoken, $user_id, $username, $first_name, $last_name, $
 {
     csrf_val($CSRFtoken);
 
-    $username = check_data($username, true, 'Username', true, true, '/user/register');
-    $first_name = check_data($first_name, true, 'First Name', true, true, '/user/register');
-    $last_name = check_data($last_name, true, 'Last Name', true, true, '/user/register');
-    $email = check_data($email, true, 'Email', true, true, '/user/register');
-    $picture_url = check_data($picture_url, true, 'Picture', true, true, '/user/register');
+    $username = check_data($username, true, 'Username', true, true, '/user/settings');
+    $first_name = check_data($first_name, true, 'First Name', true, true, '/user/settings');
+    $last_name = check_data($last_name, true, 'Last Name', true, true, '/user/settings');
+    $email = check_data($email, true, 'Email', true, true, '/user/settings');
+    $picture_url = check_data($picture_url, true, 'Picture', true, true, '/user/settings');
 
     $user = sql_select('users', 'username,email,password', "username='{$username}' OR email='{$email}'", true);
-
-    // Verify old password
-    if (!password_verify($password, $user['password'])) {
-        redirect('/user/register', 'Current password is incorrect.');
-    }
 
     // Check if username is taken
     if ($username != $user['username']) {
@@ -87,10 +82,16 @@ function user_update($CSRFtoken, $user_id, $username, $first_name, $last_name, $
 
     // Check if user wants to update password
     if (!empty($password)) {
-        $password = check_data($password, true, 'Old Password', true, true, '/user/register');
-        $new_password = check_data($new_password, true, 'New Password', true, true, '/user/register');
-        $new_password_confirm = check_data($new_password_confirm, true, 'New Password Confirm', true, true, '/user/register');
+        $password = check_data($password, true, 'Old Password', true, true, '/user/settings');
+        $new_password = check_data($new_password, true, 'New Password', true, true, '/user/settings');
+        $new_password_confirm = check_data($new_password_confirm, true, 'New Password Confirm', true, true, '/user/settings');
 
+        // Verify old password
+        if (!password_verify($password, $user['password'])) {
+            redirect('/user/settings', 'Current password is incorrect.');
+        }
+
+        // Verify new password
         if ($new_password === $new_password_confirm) {
             $new_password = password_hash($new_password, PASSWORD_BCRYPT);
 
