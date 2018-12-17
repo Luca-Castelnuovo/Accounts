@@ -45,7 +45,7 @@ HTML;
 
     send_mail($email, $subject, $body);
 
-    redirect('/', 'Account registered. Please verify your mail.');
+    redirect('/', 'Password reset link sent.');
 }
 
 ?>
