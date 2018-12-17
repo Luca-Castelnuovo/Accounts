@@ -48,7 +48,7 @@ function user_register($CSRFtoken, $username, $password, $password_confirm, $fir
     // create conformation token
     //send conformation mail
 
-    redirect('/user/register', 'Account registered. Please verify your mail.');
+    redirect('/', 'Account registered. Please verify your mail.');
 }
 
 

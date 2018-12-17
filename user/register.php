@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <label for="pictur_url">Picture URL</label>
-                            <input type="text" id="pictur_url" name="pictur_url" required/>
+                            <label for="picture_url">Picture URL</label>
+                            <input type="text" id="picture_url" name="picture_url" required/>
                         </div>
                     </div>
                     <div class="row">
