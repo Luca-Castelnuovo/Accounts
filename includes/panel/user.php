@@ -10,7 +10,7 @@ function user_register($CSRFtoken, $username, $password, $password_confirm, $fir
     $first_name = check_data($first_name, true, 'First Name', true, true, '/user/register');
     $last_name = check_data($last_name, true, 'Last Name', true, true, '/user/register');
     $email = check_data($email, true, 'Email', true, true, '/user/register');
-    $picture_url = check_data($picture_url, true, 'Picture', true, true, '/user/register');
+    $picture_url = check_data($picture_url, false, '', true);
     $created = date("Y-m-d H:i:s");
 
     // Check if username is taken
