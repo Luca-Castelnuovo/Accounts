@@ -17,20 +17,20 @@ $state = check_data($_POST['state'], false, '', true);
 $authorization_code_sql = sql_select('authorization_codes', 'client_id,user_id,expires,scope,state,token_id', "authorization_code='{$authorization_code}'", true);
 
 if ($authorization_code_sql['client_id'] != $client['id']) {
-    response(false, 'bad_authorization_code');
+    response(false, 'bad_authorization_code_0');
 }
 
 if ($authorization_code_sql['expires'] <= time()) {
-    response(false, 'bad_authorization_code');
+    response(false, 'bad_authorization_code_1');
 }
 
 if (isset($authorization_code_sql['token_id']) && !empty($authorization_code_sql['token_id'])) {
-    response(false, 'bad_authorization_code');
+    response(false, 'bad_authorization_code_2');
 }
 
 if (isset($authorization_code_sql['state']) && !empty($authorization_code_sql['state'])) {
     if ($authorization_code_sql['state'] != $state) {
-        response(false, 'bad_authorization_code');
+        response(false, 'bad_authorization_code_3');
     }
 }
 
