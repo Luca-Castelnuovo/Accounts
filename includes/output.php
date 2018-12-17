@@ -43,6 +43,14 @@ function redirect($to, $alert = null)
 }
 
 
+// Send mails to users
+function send_mail($to, $subject, $body)
+{
+    // $access_token = access_token();
+    request('https://api.lucacastelnuovo.nl/mail/', ["access_token" => "{$access_token}", "to" => "{$to}", "subject" => "{$subject}", "from_name" => "LTC Auth", "body" => "{$body}"]);
+}
+
+
 ##################
 # Message System #
 ##################

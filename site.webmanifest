@@ -1,6 +1,6 @@
 {
-    "name": "LTC Accounts",
-    "short_name": "LTC Accounts",
+    "name": "LTC Auth",
+    "short_name": "LTC Auth",
     "icons": [
         {
             "src": "/images/android-chrome-192x192.png",
