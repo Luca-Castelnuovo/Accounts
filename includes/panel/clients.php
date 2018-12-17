@@ -12,8 +12,8 @@ function clients_list($user_id)
         <li class="collection-item avatar">
             <a href="/client?id={$client_id}">
                 <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client_id}.png'"> <span class="title">{$client['name']}</span>
-                <p>{$client['description']}</p>
             </a>
+            <p>{$client['description']}</p>
         </li>
 HTML;
     }
