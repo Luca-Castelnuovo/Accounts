@@ -20,7 +20,9 @@ function loggedin()
 
 function rememberme()
 {
-    redirect('/', 'Function not implemented');
+    // TODO: build remember me system
+    redirect('/?deleteRemember&reset', 'Function not implemented');
+
     // $remember_request = request('https://auth.lucacastelnuovo.nl/remember.php', ["type" => "validate", "cookie" => "{$_COOKIE['REMEMBERME']}", "server_token" => "{$GLOBALS['config']->server_token}"], '/?reset&deleteRemember');
     // $check_request = request('https://auth.lucacastelnuovo.nl/check.php', ["token" => "{$remember_request['token']}", "server_token" => "{$GLOBALS['config']->server_token}"], '/');
     //

@@ -24,11 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$user['email_verified']) {
-        redirect('/', 'Username or password is incorrect.');
+        redirect('/', 'Account not verified, please check your mail.');
     }
 
     if ($rememberme) {
-        //create remember token
+        // TODO: create remember system
         //cookie_set('REMEMBERME', $value, 2592000);
     }
 
