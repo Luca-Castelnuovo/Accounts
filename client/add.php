@@ -33,8 +33,8 @@ page_header('Create Client');
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <label for="logo_url">Callback URL</label>
-                <input type="text" id="logo_url" name="logo_url" required/>
+                <label for="redirect_uri">Callback URL</label>
+                <input type="text" id="redirect_uri" name="redirect_uri" required/>
             </div>
         </div>
         <div class="row">
