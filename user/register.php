@@ -110,11 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="row">
             <div class="col s12">
                 <div class="card-panel p-0">
-                    <div class="col s12 m6">
+                    <div class="col s12">
                         <a href="/" class="left">Login</a>
-                    </div>
-                    <div class="col s12 m6">
-                        <a href="/user/forgot" class="right">Forgot Password</a>
                     </div>
                 </div>
             </div>
