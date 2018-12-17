@@ -104,9 +104,6 @@ function client_info($user_id, $client_id)
             </div>
         </form>
     </div>
-    <div class="row">
-        <a href="/home"><i class="material-icons">arrow_back</i> Go back</a>
-    </div>
 HTML;
 }
 
