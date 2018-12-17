@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if email is taken
     $existing_email = sql_select('users', 'id', "email='{$email}'", false);
-    if ($existing_email->num_rows > 0) {
-        redirect('/user/register', 'Email is taken, please choose another.');
+    if ($existing_email->num_rows == 0) {
+        redirect('/', "User doesn't exist.");
     }
 
     // create reset token
