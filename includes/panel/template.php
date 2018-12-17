@@ -26,14 +26,14 @@ function page_header($title = 'Unknown')
                 <a href="/home" class="brand-logo" style="padding-left: 15px">{$title}</a>
                 <a href="#" data-target="sidenav" class="right sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="/settings">Settings</a></li>
+                    <li><a href="/user/settings">Settings</a></li>
                     <li><a href="/?logout">Logout</a></li>
                 </ul>
             </div>
 
             <ul class="sidenav" id="sidenav">
                 <li><a href="/home">Home</a></li>
-                <li><a href="/settings">Settings</a></li>
+                <li><a href="/user/settings">Settings</a></li>
                 <li class="divider"></li>
                 <li><a href="/?logout">Logout</a></li>
             </ul>
