@@ -92,7 +92,7 @@ page_header('Settings');
         <div class="row">
             <div class="col s12">
                 <input type="hidden" name="CSRFtoken" value="<?= csrf_gen() ?>"/>
-                <button class="col s12 btn waves-effect blue accent-4" type="submit">Update Account</button>
+                <button class="col s12 btn-large waves-effect blue accent-4" type="submit">Update Account</button>
             </div>
         </div>
     </form>
