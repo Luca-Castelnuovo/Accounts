@@ -21,8 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if email is taken
     $user = sql_select('users', 'first_name,last_name', "email='{$email}'", false);
-    if ($existing_email->num_rows == 0) {
-        redirect('/', "User doesn't exist.");
+    if ($user->num_rows == 0) {
+        redirect('/user/forgot', "User doesn't exist.");
+    } else {
+        $user = $user->fetch_assoc();
     }
 
     // create reset token

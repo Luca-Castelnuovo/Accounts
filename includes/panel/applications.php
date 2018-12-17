@@ -79,7 +79,7 @@ HTML;
     }
 
     if (!$user_has_authorized) {
-        redirect('/home', 'Application isn\'t authorized.');
+        redirect('/home', "Application isn't authorized.");
     }
 
     echo <<<HTML
@@ -111,6 +111,6 @@ function application_revoke($user_id, $client_id, $CSRFtoken)
 
         redirect('/home', 'Application revoked.');
     } else {
-        redirect('/home', 'Application isn\'t authorized.');
+        redirect('/home', "Application isn't authorized.");
     }
 }

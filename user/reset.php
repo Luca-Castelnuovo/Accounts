@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if passwords match
     if ($password !== $password_confirm) {
-        redirect('/user/reset?token=' . $token_GET, 'Passwords don\'t match.');
+        redirect('/user/reset?token=' . $token_GET, "Passwords don't match.");
     }
 
     // Hash password

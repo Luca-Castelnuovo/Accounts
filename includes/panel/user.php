@@ -35,7 +35,7 @@ function user_register($CSRFtoken, $recaptcha_response, $username, $password, $p
 
     // Check if passwords match
     if ($password !== $password_confirm) {
-        redirect('/user/register', 'Passwords don\'t match.');
+        redirect('/user/register', "Passwords don't match.");
     }
 
     // Hash password
