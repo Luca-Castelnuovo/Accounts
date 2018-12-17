@@ -152,8 +152,6 @@ function client_reset($CSRFtoken, $user_id, $client_id)
     redirect('/client?id=' . $client_id, 'Client secret reset.');
 }
 
-//create client
-
 function client_update($CSRFtoken, $user_id, $client_id, $logo_url, $name, $description, $redirect_uri)
 {
     csrf_val($CSRFtoken);
@@ -178,4 +176,30 @@ function client_update($CSRFtoken, $user_id, $client_id, $logo_url, $name, $desc
         'description' => $description,
         'redirect_uri' => $redirect_uri,
     ], "client_id='{$client_id}'");
+}
+
+function client_create($CSRFtoken, $user_id, $logo_url, $name, $description, $redirect_uri)
+{
+    csrf_val($CSRFtoken);
+
+    $client_id = gen(32);
+    $client_secret = gen(64);
+
+    $redirect_uri = clean_data($redirect_uri);
+    $user_id = clean_data($user_id);
+    $name = clean_data($name);
+    $logo_url = clean_data($logo_url);
+    $description = clean_data($description);
+
+    sql_insert('clients', [
+        'client_id' => $client_id,
+        'client_secret' => $client_secret,
+        'redirect_uri' => $redirect_uri,
+        'user_id' => $user_id,
+        'name' => $name,
+        'logo_url' => $logo_url,
+        'description' => $description,
+    ]);
+
+    redirect('/home', 'Client created');
 }
