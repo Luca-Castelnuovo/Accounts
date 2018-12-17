@@ -98,8 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <button class="col s12 btn waves-effect blue accent-4" type="submit">Register</button>
                         </div>
                     </div>
-                    <a href="/register" class="left">Register</a>
-                    <a href="/forgot" class="right">Forgot Password</a>
                 </form>
             </div>
         </div>
