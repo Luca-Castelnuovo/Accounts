@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (!$no_session) {
+    session_start();
+}
 
 $GLOBALS['config'] = require $_SERVER['DOCUMENT_ROOT'] . '/includes/config.php';
 

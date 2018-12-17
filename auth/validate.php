@@ -1,5 +1,5 @@
 <?php
-
+$no_session = true;
 require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 
 $access_token = check_data($_REQUEST['access_token'], true, 'access_token', true);
