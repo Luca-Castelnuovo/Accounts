@@ -20,6 +20,18 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 
 ?>
 
+<style>
+    .input-field input:focus + label {color: #2962FF !important;}
+
+    .input-field input:focus {
+        border-bottom: 1px solid #2962FF !important;
+        box-shadow: 0 1px 0 0 #2962FF !important;
+    }
+
+    .mb-0{
+        margin-bottom:0
+    }
+</style>
 <div class="row">
     <?= client_info($_SESSION['id'], $_GET['id']); ?>
 </div>

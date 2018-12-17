@@ -27,7 +27,7 @@ function client_info($user_id, $client_id)
     $user_id = clean_data($user_id);
     $client_id = clean_data($client_id);
 
-    $client = sql_select('clients', 'client_id,client_secret,redirect_uri,logo_url,description,suspended', "client_id='{$client_id}'", true);
+    $client = sql_select('clients', 'client_id,client_secret,redirect_uri,logo_url,description,suspended,name', "client_id='{$client_id}'", true);
 
     if (!isset($client['client_id']) || empty($client['client_id'])) {
         redirect('/home');
@@ -36,9 +36,6 @@ function client_info($user_id, $client_id)
     $CSRFtoken = csrf_gen();
 
     echo <<<HTML
-    <style>
-        .mb-0{margin-bottom:0}
-    </style>
     <div class="row mb-0">
         <div class="col s12 m2">
             <img class="responsive-img" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client_id}.png'" width="75">
@@ -93,14 +90,12 @@ function client_info($user_id, $client_id)
             </div>
 
             <div class="row">
-                <div class="col s12">
-                    <input type="hidden" name="CSRFtoken" value="{$CSRFtoken}"/>
+                <input type="hidden" name="CSRFtoken" value="{$CSRFtoken}"/>
+                <div class="col s12 m8">
                     <button class="col s12 btn-large waves-effect blue accent-4" type="submit">Update Client</button>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <a href="?delete={$client_id}&CSRFtoken={$CSRFtoken}" class="col s12 btn-small waves-effect red accent-4" onclick="return confirm('Are you sure?')">Delete Client</a>
+                <div class="col s12 m4">
+                    <a href="?delete={$client_id}&CSRFtoken={$CSRFtoken}" class="col s12 btn-large waves-effect red accent-4" onclick="return confirm('Are you sure?')">Delete Client</a>
                 </div>
             </div>
         </form>
