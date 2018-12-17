@@ -5,6 +5,8 @@ function applications_list($user_id)
     echo '<style>.collection .collection-item.avatar{min-height:0;}</style>';
     echo '<ul class="collection">';
 
+    $user_id = clean_data($user_id);
+
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
     foreach ($user_applications as $client_id => $scope) {
@@ -28,6 +30,7 @@ HTML;
 function application_info($user_id, $client_id)
 {
     $client = clean_data($client_id);
+
     $client = sql_select('clients', 'redirect_uri,user_id,name,logo_url,description,suspended', "client_id='{$client_id}'", true);
 
     $CSRFtoken = csrf_gen();
@@ -95,6 +98,9 @@ HTML;
 function application_revoke($user_id, $client_id, $CSRFtoken)
 {
     csrf_val($CSRFtoken);
+
+    $user_id = clean_data($user_id);
+    $client_id = clean_data($client_id);
 
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
