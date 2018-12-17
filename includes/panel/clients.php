@@ -88,7 +88,7 @@ function client_info($user_id, $client_id)
             <div class="row">
                 <div class="input-field col s12">
                     <label for="redirect_uri">Redirect URI</label>
-                    <input type="email" id="redirect_uri" name="redirect_uri" required value="{$client['redirect_uri']}"/>
+                    <input type="text" id="redirect_uri" name="redirect_uri" required value="{$client['redirect_uri']}"/>
                 </div>
             </div>
 
