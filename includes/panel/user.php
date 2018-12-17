@@ -52,7 +52,7 @@ function user_register($CSRFtoken, $username, $password, $password_confirm, $fir
 }
 
 
-function user_update($CSRFtoken, $user_id, $username, $password, $new_password, $new_password_confirm, $first_name, $last_name, $email, $picture_url)
+function user_update($CSRFtoken, $user_id, $username, $first_name, $last_name, $email, $picture_url, $password =null, $new_password = null, $new_password_confirm = null)
 {
     csrf_val($CSRFtoken);
 

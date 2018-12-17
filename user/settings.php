@@ -5,7 +5,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 loggedin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    user_update($_POST['CSRFtoken'], $_SESSION['id'], $_POST['username'], $_POST['password'], $_POST['password_confirm'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['picture_url']);
+    user_update($_POST['CSRFtoken'], $_SESSION['id'], $_POST['username'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['picture_url'], $_POST['password'], $_POST['password_confirm']);
 }
 
 $user = sql_select('users', 'first_name,last_name,email,username,picture_url', "id='{$_SESSION['id']}'", true);
