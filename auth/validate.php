@@ -16,4 +16,4 @@ header('X-RateLimit-Remaining: 110');
 header('X-RateLimit-Reset: 1544951231');
 
 //Return json
-response(true, 'access_token_valid', ['client_id' => $access['client_id'], 'user_id' => $access['user_id'], 'expires' => $access['expires'], 'scope'=> json_decode($access['scope'])]);
+response(true, 'access_token_valid', ['client_id' => $access['client_id'], 'user_id' => $access['user_id'], 'expires' => $access['expires'], 'scopes'=> json_decode($access['scope'])]);
