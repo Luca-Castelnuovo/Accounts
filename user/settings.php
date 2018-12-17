@@ -14,6 +14,16 @@ page_header('Settings');
 
 ?>
 
+<style>
+    .input-field input:focus + label {
+        color: #2962FF !important;
+    }
+
+    .input-field input:focus {
+        border-bottom: 1px solid #2962FF !important;
+        box-shadow: 0 1px 0 0 #2962FF !important;
+    }
+</style>
 <div class="row">
     <h4>Settings</h4>
     <form method="post">
