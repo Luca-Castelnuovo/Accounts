@@ -65,7 +65,7 @@ function client_info($user_id, $client_id)
                 </div>
             </div>
         </div>
-        <hr>
+        <div class="section"></div>
         <form method="post">
             <div class="row">
                 <div class="input-field col s12">
