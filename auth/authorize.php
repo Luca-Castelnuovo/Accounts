@@ -10,7 +10,7 @@ $client_id = check_data($_GET['client_id'], true, 'Client_ID', true);
 
 // Optional
 $scopes = check_data($_GET['scope'], false, '', true);
-$return_to = check_data($_GET['return_to'], false, '', true);
+$redirect_uri = check_data($_GET['redirect_uri'], false, '', true);
 $state = check_data($_GET['state'], false, '', true);
 
 // Validate state
@@ -29,8 +29,8 @@ if (!isset($client['id']) || empty($client['id'])) {
 }
 
 // If not isset callback use default callback
-if (empty($return_to)) {
-    $return_to = $client['redirect_url'];
+if (empty($redirect_uri)) {
+    $redirect_uri = $client['redirect_url'];
 }
 
 // List scopes
@@ -60,8 +60,8 @@ if (array_key_exists($client_id, $user_applications) && $scope_intersect == $sco
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $CSRFtoken = check_data($_POST['CSRFtoken'], true, 'CSRF token', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
-        $recaptcha_response = check_data($_POST['g-recaptcha-response'], true, 'Recaptcha response', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}");
+        $CSRFtoken = check_data($_POST['CSRFtoken'], true, 'CSRF token', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&redirect_uri={$redirect_uri}&state={$state}");
+        $recaptcha_response = check_data($_POST['g-recaptcha-response'], true, 'Recaptcha response', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&redirect_uri={$redirect_uri}&state={$state}");
 
         // Validate csrftoken
         csrf_val($CSRFtoken);
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
         $response = json_decode(file_get_contents($url));
 
         if (!$response->success) {
-            redirect("/auth/authorize?client_id={$client_id}&scope={$scopes}&return_to={$return_to}&state={$state}", 'Please try again.');
+            redirect("/auth/authorize?client_id={$client_id}&scope={$scopes}&redirect_uri={$redirect_uri}&state={$state}", 'Please try again.');
         }
     }
 
@@ -115,20 +115,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
     }
 
     // Redirect user with authorization_code
-    if (strpos($return_to, 'http://') === false && strpos($return_to, 'https://') === false) {
-        $return_to = 'http://' . $return_to;
+    if (strpos($redirect_uri, 'http://') === false && strpos($redirect_uri, 'https://') === false) {
+        $redirect_uri = 'http://' . $redirect_uri;
     }
 
-    if (strpos($return_to, '?') !== false) {
-        $return_to_glue = '&';
+    if (strpos($redirect_uri, '?') !== false) {
+        $redirect_uri_glue = '&';
     } else {
-        $return_to_glue = '?';
+        $redirect_uri_glue = '?';
     }
 
     if (empty($state)) {
-        redirect("{$return_to}{$return_to_glue}code={$authorization_code}");
+        redirect("{$redirect_uri}{$redirect_uri_glue}code={$authorization_code}");
     } else {
-        redirect("{$return_to}{$return_to_glue}code={$authorization_code}&state={$state}");
+        redirect("{$redirect_uri}{$redirect_uri_glue}code={$authorization_code}&state={$state}");
     }
 }
 
@@ -214,7 +214,7 @@ HTML;
                         <p class="center grey-text">
                             Authorizing will redirect to
                             <br>
-                            <b><?= strtok($return_to, '?') ?></b>
+                            <b><?= strtok($redirect_uri, '?') ?></b>
                         </p>
                     </div>
                 </div>

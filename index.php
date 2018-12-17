@@ -36,10 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
     $_SESSION['id'] = $user['id'];
 
-    $return_to = url_decode($_GET['return_to']);
+    $redirect_uri = url_decode($_GET['redirect_uri']);
 
-    if ($return_to) {
-        redirect($return_to);
+    if ($redirect_uri) {
+        redirect($redirect_uri);
     } else {
         redirect('/home', 'You are logged in.');
     }
@@ -58,8 +58,8 @@ if (isset($_GET['reset'])) {
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
-    if (isset($_GET['return_to'])) {
-        $url = url_decode($_GET['return_to']);
+    if (isset($_GET['redirect_uri'])) {
+        $url = url_decode($_GET['redirect_uri']);
         redirect($url);
     } else {
         redirect('/home');
