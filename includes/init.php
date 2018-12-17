@@ -12,6 +12,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/sql.php';
 
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/panel/applications.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/panel/authentication.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/panel/clients.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/panel/security.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/panel/template.php';
 

@@ -12,5 +12,9 @@ page_header('Home');
     <h4>Authorized Apps</h4>
     <?= applications_list($_SESSION['id']); ?>
 </div>
+<div class="row">
+    <h4>Your clients</h4>
+    <?= clients_list($_SESSION['id']); ?>
+</div>
 
 <?= page_footer(); ?>
