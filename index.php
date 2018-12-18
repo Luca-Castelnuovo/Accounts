@@ -109,6 +109,9 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
         .p-0 {
            padding: 0;
         }
+
+        .progress {background-color: #94b0ff;}
+        .progress .indeterminate {background-color: #2962FF;}
     </style>
 </head>
 
@@ -170,6 +173,7 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
     </div>
 </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeuWIEUAAAAAF6aZy05cC5uNot2veX4IbsBxjza"></script>
     <script src="/js/login.js"></script>
     <?= alert_display() ?>
 </body>

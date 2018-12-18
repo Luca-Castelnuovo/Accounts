@@ -21,6 +21,9 @@ page_header('Create Client');
         border-bottom: 1px solid #2962FF !important;
         box-shadow: 0 1px 0 0 #2962FF !important;
     }
+
+    .progress {background-color: #94b0ff;}
+    .progress .indeterminate {background-color: #2962FF;}
 </style>
 <div class="row">
     <h4>Create Client</h4>
@@ -64,5 +67,6 @@ page_header('Create Client');
     </form>
 </div>
 
+<script src="https://www.google.com/recaptcha/api.js?render=6LeuWIEUAAAAAF6aZy05cC5uNot2veX4IbsBxjza"></script>
 <script src="/js/client_add.js"></script>
 <?= page_footer(); ?>
