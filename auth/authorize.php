@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
 
     // Create authorization token
     $authorization_code = gen($GLOBALS['config']->auth->length->authorization_code);
-    $expires = time() + $GLOBALS['config']->auth->expires->authorization_code;
+    $expires = expires($GLOBALS['config']->auth->expires->authorization_code);
     $scope_sql = json_encode($scope_array);
 
     sql_insert('authorization_codes', [

@@ -31,8 +31,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($rememberme) {
-        // TODO: create remember system
-        //cookie_set('REMEMBERME', $value, 2592000);
+        $expires = expires($GLOBALS['config']->auth->expires->remember_me);
+        $token = gen(256);
+
+        sql_insert('general_tokens', [
+            'revoked' => '0',
+            'type' => 'remember_me',
+            'user_id' => $username,
+            'expires' => $expires,
+            'token' => $token
+        ]);
+
+        $cookie = $user['id'] . ':' . $token . ':' . hash_hmac('sha512', $cookie, $GLOBALS['config']->security->hmac);
+
+        cookie_set('REMEMBERME', $cookie, $expires);
     }
 
     $_SESSION['logged_in'] = true;
@@ -41,15 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $redirect_uri = url_decode($_GET['redirect_uri']);
 
+    session_regenerate_id(true);
+
     if ($redirect_uri) {
         redirect($redirect_uri);
     } else {
         redirect('/home', 'You are logged in.');
     }
-}
-
-if (isset($_GET['deleteRemember']) || isset($_GET['logout'])) {
-    cookie_delete('REMEMBERME');
 }
 
 if (isset($_GET['logout'])) {
@@ -70,7 +80,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
 }
 
 if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
-    rememberme();
+    // rememberme($_GET['redirect_uri']);
 }
 
 ?>

@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     // create conformation token
-    $expires = time() + 31449600;
+    $expires = expires($GLOBALS['config']->auth->expires->verify_mail);
     $token = gen(64);
 
     sql_insert('general_tokens', [

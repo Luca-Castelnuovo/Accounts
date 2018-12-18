@@ -18,35 +18,44 @@ function loggedin()
 }
 
 
-function rememberme()
+function rememberme($redirect_uri = null)
 {
-    // TODO: build remember me system
-    redirect('/?deleteRemember&reset', 'Function not implemented');
+    list($user_id, $token, $mac) = explode(':', $_COOKIE['REMEMBERME']);
 
-    // $remember_request = request('https://auth.lucacastelnuovo.nl/remember.php', ["type" => "validate", "cookie" => "{$_COOKIE['REMEMBERME']}", "server_token" => "{$GLOBALS['config']->server_token}"], '/?reset&deleteRemember');
-    // $check_request = request('https://auth.lucacastelnuovo.nl/check.php', ["token" => "{$remember_request['token']}", "server_token" => "{$GLOBALS['config']->server_token}"], '/');
-    //
-    // if (in_array('admin.account.lucacastelnuovo.nl', allowed_domains($remember_request['token']))) {
-    //     $_SESSION['admin'] = true;
-    // }
-    //
-    // $_SESSION['logged_in'] = true;
-    // $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-    // $_SESSION['token'] = $remember_request['token'];
-    // $_SESSION['expires'] = $remember_request['expires'];
-    //
-    // session_regenerate_id(true);
-    //
-    // if (isset($_SESSION['return_url'])) {
-    //     redirect($_SESSION['return_url'], 'You are logged in');
-    // } else {
-    //     redirect('/home', 'You are logged in');
-    // }
+    $user_id = check_data($user_id, false, '', true);
+    $token = check_data($token, false, '', true);
+    $mac = check_data($mac, false, '', true);
+
+    $tokens = sql_select('general_tokens', 'expires', "token='{$token}' AND user_id='{$user_id}' AND revoked='0'", true);
+
+    if ($tokens['expires'] <= time()) {
+        cookie_delete('REMEMBERME');
+        redirect('/?reset', 'Please login');
+    }
+
+    $_SESSION['logged_in'] = true;
+    $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+    $_SESSION['id'] = $user_id;
+
+    session_regenerate_id(true);
+
+    if (isset($_GET['redirect_uri'])) {
+        $url = url_decode($_GET['redirect_uri']);
+        redirect($url);
+    } else {
+        redirect('/home');
+    }
 }
 
 
 function logout()
 {
+    if (isset($_COOKIE['REMEMBERME'])) {
+        list($user_id, $token, $mac) = explode(':', $_COOKIE['REMEMBERME']);
+        sql_delete('general_tokens', "id='{$user_id}' AND token='{$token}' AND type = 'remember_me'");
+        cookie_delete('REMEMBERME');
+    }
+
     session_destroy();
     session_start();
     redirect('/', 'You are logged out.');
@@ -92,7 +101,7 @@ function url_decode($url)
 
 function cookie_set($name, $value, $lifeTime)
 {
-    setcookie($name, $value, time() + $lifeTime, '/', $GLOBALS['config']->app->domain, true, true);
+    setcookie($name, $value, expires($lifeTime), '/', $GLOBALS['config']->app->domain, true, true);
 }
 
 function cookie_delete($name)

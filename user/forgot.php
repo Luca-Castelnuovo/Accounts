@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // create reset token
-    $expires = time() + 10800;
+    $expires = expires($GLOBALS['config']->auth->expires->reset_password);
     $token = gen(128);
 
     sql_insert('general_tokens', [

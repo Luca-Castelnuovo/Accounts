@@ -36,7 +36,7 @@ if (isset($authorization_code_sql['state']) && !empty($authorization_code_sql['s
 
 // Create access token`
 $access_token = gen($GLOBALS['config']->auth->length->access_token);
-$expires = time() + $GLOBALS['config']->auth->expires->access_token;
+$expires = expires($GLOBALS['config']->auth->expires->access_token);
 
 sql_insert('access_tokens', [
     'access_token' => $access_token,
