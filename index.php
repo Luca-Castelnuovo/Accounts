@@ -146,14 +146,14 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
                             <input type="password" id="password" name="password" required />
                         </div>
                     </div>
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col s12">
                             <label>
                                 <input type="checkbox" class="filled-in" name="remember" value="true"/>
                                 <span>Remember Me</span>
                             </label>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="row">
                         <div class="col s12">
                             <div id="loaderContainer" class="progress">
