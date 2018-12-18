@@ -138,7 +138,7 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
                     <div class="row">
                         <div class="col s12">
                             <label>
-                                <input type="checkbox" class="filled-in" name="remember" value="true"/>
+                                <input type="checkbox" class="filled-in" name="rememberme" value="true"/>
                                 <span>Remember Me</span>
                             </label>
                         </div>
