@@ -39,9 +39,9 @@ function rememberme($redirect_uri = null)
 
     if (isset($_GET['redirect_uri'])) {
         $url = url_decode($_GET['redirect_uri']);
-        redirect($url);
+        redirect($url, 'You are logged in.');
     } else {
-        redirect('/home');
+        redirect('/home', 'You are logged in.');
     }
 }
 
