@@ -69,7 +69,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
 }
 
 if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
-    // rememberme($_GET['redirect_uri']);
+    rememberme($_GET['redirect_uri']);
 }
 
 ?>
