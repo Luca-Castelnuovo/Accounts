@@ -35,6 +35,8 @@ function application_info($user_id, $client_id)
 
     $CSRFtoken = csrf_gen();
 
+    $description = nl2br($client['description']);
+
     echo <<<HTML
     <style>
         .mb-0{margin-bottom:0}
@@ -55,7 +57,7 @@ function application_info($user_id, $client_id)
         <h4>
             Description
         </h4>
-        <p>{$client['description']}</p>
+        <p>{$description}</p>
     </div>
     <div class="row">
         <div class="col s12 m9">
