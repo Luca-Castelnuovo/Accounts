@@ -22,6 +22,15 @@ page_header('Create Client');
         box-shadow: 0 1px 0 0 #2962FF !important;
     }
 
+    .input-field textarea:focus + label {
+        color: #2962FF !important;
+    }
+
+    .row .input-field textarea:focus {
+        border-bottom: 1px solid #2962FF !important;
+        box-shadow: 0 1px 0 0 #2962FF !important
+    }
+
     .progress {background-color: #94b0ff;}
     .progress .indeterminate {background-color: #2962FF;}
 </style>

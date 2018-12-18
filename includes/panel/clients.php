@@ -178,8 +178,11 @@ function client_update($CSRFtoken, $user_id, $client_id, $logo_url, $name, $desc
 
     $logo_url = clean_data($logo_url);
     $name = clean_data($name);
-    $description = clean_data($description);
     $redirect_uri = clean_data($redirect_uri);
+
+    $conn = sql_connect();
+    $description = nl2br(htmlspecialchars(trim($conn->escape_string($description))));
+    sql_disconnect($conn);
 
     sql_update('clients', [
         'logo_url' => $logo_url,

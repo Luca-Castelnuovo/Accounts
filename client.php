@@ -32,6 +32,15 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
         box-shadow: 0 1px 0 0 #2962FF !important;
     }
 
+    .input-field textarea:focus + label {
+        color: #2962FF !important;
+    }
+
+    .row .input-field textarea:focus {
+        border-bottom: 1px solid #2962FF !important;
+        box-shadow: 0 1px 0 0 #2962FF !important
+    }
+
     .mb-0{
         margin-bottom:0
     }
