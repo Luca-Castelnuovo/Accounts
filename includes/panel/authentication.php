@@ -29,6 +29,7 @@ function rememberme($redirect_uri = null)
     $tokens = sql_select('general_tokens', 'expires', "token='{$token}' AND user_id='{$user_id}' AND type = 'remember_me' AND revoked='0'", true);
 
     var_dump($tokens);
+    exit;
 
     if ($tokens['expires'] <= time()) {
         cookie_delete('REMEMBERME');
