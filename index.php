@@ -17,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = check_data($_POST['password'], true, 'Password', true, true, '/');
     $rememberme = check_data($_POST['rememberme'], false, '', true);
 
+    csrf_val($_POST['CSRFtoken'], '/');
+    captcha_val($_POST['g-recaptcha-response'], '/');
+
     $user = sql_select('users', 'id,password,email_verified', "username='{$username}' OR email='{$username}'", true);
 
     if (!password_verify($password, $user['password'])) {

@@ -5,7 +5,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 loggedin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    client_create($_POST['CSRFtoken'], $_SESSION['id'], $_POST['logo_url'], $_POST['name'], $_POST['description'], $_POST['redirect_uri']);
+    client_create($_POST['CSRFtoken'], $_SESSION['id'], $_POST['logo_url'], $_POST['name'], $_POST['description'], $_POST['redirect_uri'], $_POST['g-recaptcha-response']);
 }
 
 page_header('Create Client');
