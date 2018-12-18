@@ -26,14 +26,9 @@ function rememberme($redirect_uri = null)
     $token = check_data($token, false, '', true);
     $mac = check_data($mac, false, '', true);
 
-    $tokens = sql_select('general_tokens', 'expires', "token='{$token}'", true);
+    $tokens = sql_select('general_tokens', 'expires,user_id,revoked', "token='{$token}'", true);
 
-    // AND user_id='{$user_id}' AND type = 'remember_me' AND revoked='0'
-
-    var_dump($tokens);
-    exit;
-
-    if ($tokens['expires'] <= time()) {
+    if ($tokens['expires'] <= time() || $tokens['expires'] != 'remember_me' || $tokens['user_id'] != $user_id) {
         cookie_delete('REMEMBERME');
         redirect('/?reset', 'Please login');
     }
