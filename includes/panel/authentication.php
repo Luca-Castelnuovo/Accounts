@@ -26,7 +26,7 @@ function rememberme($redirect_uri = null)
     $token = check_data($token, false, '', true);
     $tokens = sql_select('general_tokens', 'expires', "token='{$token}' AND type='remember_me' AND user_id='{$user_id}' AND revoked='0'", true);
 
-    if ($tokens['expires'] <= time() || !hash_equals(hash_hmac('sha512', $tokens['user_id'] . ':' . $token, $GLOBALS['config']->security->hmac), $mac)) {
+    if ($tokens['expires'] <= time() || !hash_equals(hash_hmac('sha512', $user_id . ':' . $token, $GLOBALS['config']->security->hmac), $mac)) {
         cookie_delete('REMEMBERME');
         redirect('/?reset', 'Please login');
     }
