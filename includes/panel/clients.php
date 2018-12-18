@@ -121,6 +121,15 @@ function client_delete($CSRFtoken, $user_id, $client_id)
         redirect('/home');
     }
 
+    $users_with_client = sql_select('users', 'id', "applications CONTAINS '{$client_id}'", false);
+
+    while ($user_with_client = $users_with_client->fetch_assoc()) {
+        $user = sql_select('users', 'applications', "id='{$user_with_client['id']}'", true);
+        $applications = json_decode($user['applications'], true);
+        unset($applications[$client_id]);
+        sql_update('users', ['applications' => $applications], "id='{$user_with_client['id']}'");
+    }
+
     sql_delete('clients', "client_id='{$client_id}'");
     sql_delete('access_tokens', "client_id='{$client_id}'");
     sql_delete('authorization_codes', "client_id='{$client_id}'");
