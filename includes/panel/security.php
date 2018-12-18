@@ -11,15 +11,26 @@ function csrf_gen()
 }
 
 
-function csrf_val($CSRFtoken)
+function csrf_val($CSRFtoken, $redirect = '/')
 {
     if (!isset($_SESSION['CSRFtoken'])) {
-        redirect('/', 'CSRF Error');
+        redirect($redirect, 'CSRF Error');
     }
 
     if (!(hash_equals($_SESSION['CSRFtoken'], $CSRFtoken))) {
-        redirect('/', 'CSRF Error');
+        redirect($redirect, 'CSRF Error');
     } else {
         unset($_SESSION['CSRFtoken']);
+    }
+}
+
+
+function captcha_val($resonse, $redirect = '/')
+{
+    $url = "https://www.google.com/recaptcha/api/siteverify?secret={$GLOBALS['config']->recaptcha->secret_key}&response={$resonse}";
+    $response = json_decode(file_get_contents($url));
+
+    if (!$response->success) {
+        redirect($redirect, 'Please try again.');
     }
 }

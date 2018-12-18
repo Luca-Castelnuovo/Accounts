@@ -60,19 +60,8 @@ if (array_key_exists($client_id, $user_applications) && $scope_intersect == $sco
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $CSRFtoken = check_data($_POST['CSRFtoken'], true, 'CSRF token', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&redirect_uri={$redirect_uri}&state={$state}");
-        $recaptcha_response = check_data($_POST['g-recaptcha-response'], true, 'Recaptcha response', true, true, "/auth/authorize?client_id={$client_id}&scope={$scopes}&redirect_uri={$redirect_uri}&state={$state}");
-
-        // Validate csrftoken
-        csrf_val($CSRFtoken);
-
-        // Recpatcha validation
-        $url = "https://www.google.com/recaptcha/api/siteverify?secret={$GLOBALS['config']->recaptcha->secret_key}&response={$recaptcha_response}";
-        $response = json_decode(file_get_contents($url));
-
-        if (!$response->success) {
-            redirect("/auth/authorize?client_id={$client_id}&scope={$scopes}&redirect_uri={$redirect_uri}&state={$state}", 'Please try again.');
-        }
+        csrf_val($_POST['CSRFtoken'], "/auth/authorize?client_id={$client_id}&scope={$scopes}&redirect_uri={$redirect_uri}&state={$state}");
+        captcha_val($_POST['g-recaptcha-response'], "/auth/authorize?client_id={$client_id}&scope={$scopes}&redirect_uri={$redirect_uri}&state={$state}");
     }
 
     // Create authorization token

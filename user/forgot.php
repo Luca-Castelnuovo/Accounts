@@ -8,14 +8,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_val($_POST['CSRFtoken']);
-
-    $recaptcha_response = check_data($_POST['g-recaptcha-response'], true, 'Recaptcha', true, true, '/user/register');
-    $url = "https://www.google.com/recaptcha/api/siteverify?secret={$GLOBALS['config']->recaptcha->secret_key}&response={$recaptcha_response}";
-    $response = json_decode(file_get_contents($url));
-
-    if (!$response->success) {
-        redirect('/user/forgot', 'Please try again.');
-    }
+    captcha_validate($_POST['g-recaptcha-response'], '/user/register');
 
     $email = check_data($_POST['email'], true, 'Emai;', true, true, '/user/forgot');
 

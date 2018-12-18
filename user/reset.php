@@ -17,14 +17,7 @@ if ($token['expires'] <= time() || $token['revoked']) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_val($_POST['CSRFtoken']);
-
-    $recaptcha_response = check_data($_POST['g-recaptcha-response'], true, 'Recaptcha', true, true, '/user/register');
-    $url = "https://www.google.com/recaptcha/api/siteverify?secret={$GLOBALS['config']->recaptcha->secret_key}&response={$recaptcha_response}";
-    $response = json_decode(file_get_contents($url));
-
-    if (!$response->success) {
-        redirect('/user/reset?token=' . $token_GET, 'Please try again.');
-    }
+    captcha_validate($_POST['g-recaptcha-response'], '/user/reset?token=' . $token_GET);
 
     $password = check_data($_POST['password'], true, 'Password', true, true, '/user/reset?token=' . $token_GET);
     $password_confirm = check_data($_POST['password_confirm'], true, 'Password Confirm', true, true, '/user/reset?token=' . $token_GET);

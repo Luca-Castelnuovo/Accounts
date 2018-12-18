@@ -7,23 +7,16 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    csrf_val($CSRFtoken);
+    csrf_val($_POST['CSRFtoken']);
+    captcha_validate($_POST['g-recaptcha-response'], '/user/register');
 
-    $recaptcha_response = check_data($recaptcha_response, true, 'Username', true, true, '/user/register');
-    $url = "https://www.google.com/recaptcha/api/siteverify?secret={$GLOBALS['config']->recaptcha->secret_key}&response={$recaptcha_response}";
-    $response = json_decode(file_get_contents($url));
-
-    if (!$response->success) {
-        redirect('/user/register', 'Please try again.');
-    }
-
-    $username = check_data($username, true, 'Username', true, true, '/user/register');
-    $password = check_data($password, true, 'Password', true, true, '/user/register');
-    $password_confirm = check_data($password_confirm, true, 'Password Confirm', true, true, '/user/register');
-    $first_name = check_data($first_name, true, 'First Name', true, true, '/user/register');
-    $last_name = check_data($last_name, true, 'Last Name', true, true, '/user/register');
-    $email = check_data($email, true, 'Email', true, true, '/user/register');
-    $picture_url = check_data($picture_url, false, '', true);
+    $username = check_data($_POST['username'], true, 'Username', true, true, '/user/register');
+    $password = check_data($_POST['password'], true, 'Password', true, true, '/user/register');
+    $password_confirm = check_data($_POST['password_confirm'], true, 'Password Confirm', true, true, '/user/register');
+    $first_name = check_data($_POST['first_name'], true, 'First Name', true, true, '/user/register');
+    $last_name = check_data($_POST['last_name'], true, 'Last Name', true, true, '/user/register');
+    $email = check_data($_POST['email'], true, 'Email', true, true, '/user/register');
+    $picture_url = check_data($_POST['picture_url'], false, '', true);
     $created = date("Y-m-d H:i:s");
 
     // Check if username is taken
