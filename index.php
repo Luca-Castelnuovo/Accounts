@@ -2,16 +2,6 @@
 
 require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 
-$client_id = check_data($_GET['client_id'], false, '', true);
-
-if (isset($client_id) && !empty($client_id)) {
-    $client = sql_select('clients', 'name,profile_url', 'client_id=' . $client_id, true);
-
-    if (!isset($client['name']) || !isset($client['profile_url'])) {
-        redirect('/');
-    }
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = check_data($_POST['username'], true, 'Username', true, true, '/');
     $password = check_data($_POST['password'], true, 'Password', true, true, '/');
