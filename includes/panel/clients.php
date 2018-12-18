@@ -27,7 +27,7 @@ function client_info($user_id, $client_id)
     $user_id = clean_data($user_id);
     $client_id = clean_data($client_id);
 
-    $client = sql_select('clients', 'client_id,client_secret,redirect_uri,logo_url,description,suspended,name', "client_id='{$client_id}'", true);
+    $client = sql_select('clients', 'client_id,client_secret,redirect_uri,logo_url,description,name', "client_id='{$client_id}'", true);
 
     if (!isset($client['client_id']) || empty($client['client_id'])) {
         redirect('/home');
