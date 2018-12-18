@@ -8,12 +8,14 @@ function clients_list($user_id)
     $clients = sql_select('clients', 'client_id,name,logo_url,description', "user_id='{$user_id}'", false);
 
     while ($client = $clients->fetch_assoc()) {
+        $description = nl2br($client['description']);
+
         echo <<<HTML
         <li class="collection-item avatar">
             <a href="/client?id={$client['client_id']}">
                 <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client['client_id']}.png'"> <span class="title">{$client['name']}</span>
             </a>
-            <p>{$client['description']}</p>
+            <p>{$description}</p>
         </li>
 HTML;
     }
@@ -181,7 +183,7 @@ function client_update($CSRFtoken, $user_id, $client_id, $logo_url, $name, $desc
     $redirect_uri = clean_data($redirect_uri);
 
     $conn = sql_connect();
-    $description = nl2br(htmlspecialchars(trim($conn->escape_string($description))));
+    $description = htmlspecialchars(trim($conn->escape_string($description)));
     sql_disconnect($conn);
 
     sql_update('clients', [
@@ -206,7 +208,7 @@ function client_create($CSRFtoken, $user_id, $logo_url, $name, $description, $re
     $logo_url = clean_data($logo_url);
 
     $conn = sql_connect();
-    $description = nl2br(htmlspecialchars(trim($conn->escape_string($description))));
+    $description = htmlspecialchars(trim($conn->escape_string($description)));
     sql_disconnect($conn);
 
     sql_insert('clients', [
