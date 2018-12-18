@@ -24,7 +24,7 @@ function rememberme($redirect_uri = null)
 
     $user_id = check_data($user_id, false, '', true);
     $token = check_data($token, false, '', true);
-    $tokens = sql_select('general_tokens', 'expires', "token='{$token}' AND type='remember_me' AND user_id='{$user_id}' AND revoked='1'", true);
+    $tokens = sql_select('general_tokens', 'expires', "token='{$token}' AND type='remember_me' AND user_id='{$user_id}' AND revoked='0'", true);
 
     if ($tokens['expires'] <= time() || !hash_equals(hash_hmac('sha512', $tokens['user_id'] . ':' . $token, $GLOBALS['config']->security->hmac), $mac)) {
         cookie_delete('REMEMBERME');
@@ -53,7 +53,7 @@ function logout()
 
         $user_id = check_data($user_id, false, '', true);
         $token = check_data($token, false, '', true);
-        $tokens = sql_select('general_tokens', 'expires', "token='{$token}' AND type='remember_me' AND user_id='{$user_id}' AND revoked='1'", true);
+        $tokens = sql_select('general_tokens', 'expires', "token='{$token}' AND type='remember_me' AND user_id='{$user_id}' AND revoked='0'", true);
 
         if ($tokens['expires'] <= time() || !hash_equals(hash_hmac('sha512', $tokens['user_id'] . ':' . $token, $GLOBALS['config']->security->hmac), $mac)) {
             sql_update('general_tokens', [
