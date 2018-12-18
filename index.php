@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'token' => $token
         ]);
 
-        $cookie = $user['id'] . ':' . $token . ':' . hash_hmac('sha512', $cookie, $GLOBALS['config']->security->hmac);
+        $cookie = $user['id'] . ':' . $token . ':' . hash_hmac('sha512', $user['id'] . ':' . $token, $GLOBALS['config']->security->hmac);
 
         cookie_set('REMEMBERME', $cookie, $expires);
     }
