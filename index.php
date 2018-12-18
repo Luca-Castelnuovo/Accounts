@@ -140,8 +140,13 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
                     </div> -->
                     <div class="row">
                         <div class="col s12">
+                            <div id="loaderContainer" class="progress">
+                                <div class="indeterminate"></div>
+                            </div>
+
                             <input type="hidden" name="CSRFtoken" value="<?= csrf_gen() ?>"/>
-                            <button class="col s12 btn waves-effect blue accent-4" type="submit">Login</button>
+                            <input id="recaptchaResponse" type="hidden" name="g-recaptcha-response" value="null">
+                            <button id="submitBtn" class="col s12 btn waves-effect blue accent-4" type="submit">Login</button>
                         </div>
                     </div>
                 </form>
@@ -162,6 +167,7 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
     </div>
 </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/js/login.js"></script>
     <?= alert_display() ?>
 </body>
 
