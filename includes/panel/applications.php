@@ -52,6 +52,12 @@ function application_info($user_id, $client_id)
     </div>
     <hr>
     <div class="row">
+        <h4>
+            Description
+        </h4>
+        <p>{$client['description']}</p>
+    </div>
+    <div class="row">
         <div class="col s12 m9">
             <h4>
                 Permissions

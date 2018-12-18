@@ -88,7 +88,12 @@ function client_info($user_id, $client_id)
             <div class="row">
                 <div class="input-field col s12">
                     <label for="description">Description</label>
-                    <input type="text" id="description" name="description" value="{$client['description']}"/>
+                    <textarea id="description" class="materialize-textarea" name="description">{$client['description']}</textarea>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            M.textareaAutoResize(document.querySelector('#description'));
+                        });
+                    </script>
                 </div>
             </div>
 
@@ -196,6 +201,8 @@ function client_create($CSRFtoken, $user_id, $logo_url, $name, $description, $re
     $name = clean_data($name);
     $logo_url = clean_data($logo_url);
     $description = clean_data($description);
+
+    $description = nl2br($description);
 
     sql_insert('clients', [
         'client_id' => $client_id,

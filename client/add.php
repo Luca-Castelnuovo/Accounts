@@ -46,7 +46,7 @@ page_header('Create Client');
         <div class="row">
             <div class="input-field col s12">
                 <label for="description">Description</label>
-                <input type="text" id="description" name="description"/>
+                <textarea id="description" class="materialize-textarea" name="description"></textarea>
             </div>
         </div>
 
