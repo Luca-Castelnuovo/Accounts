@@ -15,7 +15,6 @@ if (isset($client_id) && !empty($client_id)) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = check_data($_POST['username'], true, 'Username', true, true, '/');
     $password = check_data($_POST['password'], true, 'Password', true, true, '/');
-    $rememberme = check_data($_POST['rememberme'], false, '', true);
 
     csrf_val($_POST['CSRFtoken'], '/');
     captcha_val($_POST['g-recaptcha-response'], '/');
@@ -30,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('/', 'Account not verified, please check your mail.');
     }
 
-    if ($rememberme) {
+    if ($_POST['rememberme']) {
         $expires = expires($GLOBALS['config']->auth->expires->remember_me);
         $token = gen(256);
 
