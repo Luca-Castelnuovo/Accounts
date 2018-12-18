@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sql_insert('general_tokens', [
             'revoked' => '0',
             'type' => 'remember_me',
-            'user_id' => $username,
+            'user_id' => $user['id'],
             'expires' => $expires,
             'token' => $token
         ]);
