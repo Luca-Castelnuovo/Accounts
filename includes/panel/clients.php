@@ -197,7 +197,7 @@ function client_update($CSRFtoken, $user_id, $client_id, $logo_url, $name, $desc
 function client_create($CSRFtoken, $user_id, $logo_url, $name, $description, $redirect_uri, $response)
 {
     csrf_val($CSRFtoken);
-    captcha_validate($response, '/client/add');
+    captcha_val($response, '/client/add');
 
     $client_id = gen(32);
     $client_secret = gen(64);
