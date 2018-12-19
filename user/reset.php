@@ -17,7 +17,7 @@ if ($token['expires'] <= time() || $token['revoked']) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_val($_POST['CSRFtoken']);
-    captcha_validate($_POST['g-recaptcha-response'], '/user/reset?token=' . $token_GET);
+    captcha_val($_POST['g-recaptcha-response'], '/user/reset?token=' . $token_GET);
 
     $password = check_data($_POST['password'], true, 'Password', true, true, '/user/reset?token=' . $token_GET);
     $password_confirm = check_data($_POST['password_confirm'], true, 'Password Confirm', true, true, '/user/reset?token=' . $token_GET);
