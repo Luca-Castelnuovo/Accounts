@@ -8,7 +8,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_val($_POST['CSRFtoken']);
-    captcha_validate($_POST['g-recaptcha-response'], '/user/register');
+    captcha_val($_POST['g-recaptcha-response'], '/user/register');
 
     $username = check_data($_POST['username'], true, 'Username', true, true, '/user/register');
     $password = check_data($_POST['password'], true, 'Password', true, true, '/user/register');
