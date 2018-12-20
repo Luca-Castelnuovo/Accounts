@@ -34,9 +34,8 @@ if (empty($redirect_uri)) {
 }
 
 // List scopes
-if (empty($scopes)) {
-    $scope_array = ['read:basic'];
-} else {
+$scope_array = ['read:basic'];
+if (!empty($scopes)) {
     $scope_array = explode(',', $scopes);
 }
 
