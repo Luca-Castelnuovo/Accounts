@@ -3,7 +3,15 @@
 //Reponse to client
 function response($success, $message, $extra = null)
 {
-    $output = ["success" => $success, "message" => strtolower($message)];
+    $output = ["success" => $success];
+
+    if (isset($message) && !empty($message)) {
+        if ($success) {
+            $output = array_merge($output, ["message" => $message]);
+        } else {
+            $output = array_merge($output, ["error" => $message]);
+        }
+    }
 
     if (!empty($extra)) {
         $output = array_merge($output, $extra);

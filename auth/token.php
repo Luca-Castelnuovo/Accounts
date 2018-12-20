@@ -51,4 +51,4 @@ $token_id = sql_select('access_tokens', 'id', "access_token='{$access_token}'", 
 sql_update('authorization_codes', ['token_id' => $token_id], "authorization_code='{$authorization_code}'");
 
 $scope_array = json_decode($authorization_code_sql['scope']);
-response(true, 'authorization_code_valid', ['access_token' => $access_token, 'scopes' => $scope_array]);
+response(true, '', ['access_token' => $access_token, 'scopes' => $scope_array]);
