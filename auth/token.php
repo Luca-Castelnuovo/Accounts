@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $client = client_validation($_POST['client_id'], $_POST['client_secret']);
 
 // Input
-$authorization_code = check_data($_POST['authorization_code'], true, 'authorization_code', true);
+$authorization_code = check_data($_POST['code'], true, 'authorization_code', true);
 $state = check_data($_POST['state'], false, '', true);
 
 // Validate authorization code
