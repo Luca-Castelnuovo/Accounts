@@ -39,6 +39,8 @@ if (!empty($scopes)) {
     $scope_array = explode(',', $scopes);
 }
 
+$scope_array = array_unique($scope_array);
+
 foreach ($scope_array as $scope) {
     $scope = check_data($scope, false, '', true);
     $scope_sql = sql_select('scopes', 'id,title,description,icon', "scope='{$scope}'", true);
