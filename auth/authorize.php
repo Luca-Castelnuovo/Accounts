@@ -40,6 +40,17 @@ if (empty($scopes)) {
     $scope_array = explode(',', $scopes);
 }
 
+foreach ($scope_array as $scope) {
+    $scope = check_data($scope, false, '', true);
+    $scope_sql = sql_select('scopes', 'id,title,description,icon', "scope='{$scope}'", true);
+
+    if (!isset($scope_sql['id'])) {
+        if (($key = array_search($scope, $scope_array)) !== false) {
+            unset($scope_array[$key]);
+        }
+    }
+}
+
 // Query user
 $user = sql_select('users', 'id,username,picture_url,applications', "id='{$_SESSION['id']}'", true);
 $user_applications = json_decode($user['applications'], true);
