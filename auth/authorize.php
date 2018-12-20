@@ -16,7 +16,7 @@ $state = check_data($_GET['state'], false, '', true);
 // Validate state
 if (isset($state) && !empty($state)) {
     if (strlen($state) > 128) {
-        response(false, 'state_to_long_max_length_128');
+        response(false, 'state_too_long_max_length_128');
     }
 }
 
