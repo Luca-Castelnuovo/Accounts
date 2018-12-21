@@ -15,6 +15,7 @@ page_header('Home');
     <h4>Authorized Apps</h4>
     <?= applications_list($_SESSION['id']); ?>
 </div>
+
 <?php if ($_SESSION['developer']) { ?>
 <div class="row">
     <div class="row">
@@ -28,12 +29,14 @@ page_header('Home');
     <?= clients_list($_SESSION['id']); ?>
 </div>
 <?php } ?>
+
 <?php if (!$_SESSION['developer']) { ?>
 <div class="row">
     <?php $user = sql_select('users', 'username,email', "id='{$_SESSION['id']}'", true); ?>
     <a href="mailto:ltcastelnuovo@gmail.com?subject=Request Developer Account || LTCAuth&body=Username: <?= $user['username'] ?>%0AEmail: <?= $user['email'] ?>%0AWants developer account." class="btn waves-effect blue accent-4">Request developer account</a>
 </div>
 <?php } ?>
+
 <?php if ($_SESSION['admin']) { ?>
 <div class="row">
     <h4>Admin Panel</h4>
