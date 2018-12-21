@@ -2,25 +2,27 @@
 
 function clients_list($user_id)
 {
-    echo '<ul class="collection">';
-
     $user_id = clean_data($user_id);
     $clients = sql_select('clients', 'client_id,name,logo_url,description', "user_id='{$user_id}'", false);
 
-    while ($client = $clients->fetch_assoc()) {
-        $description = nl2br($client['description']);
+    if ($clients->num_rows != 0) {
+        echo '<ul class="collection">';
 
-        echo <<<HTML
-        <li class="collection-item avatar">
-            <a href="/client?id={$client['client_id']}">
-                <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client['client_id']}.png'"> <span class="title">{$client['name']}</span>
-            </a>
-            <p>{$description}</p>
-        </li>
+        while ($client = $clients->fetch_assoc()) {
+            $description = nl2br($client['description']);
+
+            echo <<<HTML
+            <li class="collection-item avatar">
+                <a href="/client?id={$client['client_id']}">
+                    <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client['client_id']}.png'"> <span class="title">{$client['name']}</span>
+                </a>
+                <p>{$description}</p>
+            </li>
 HTML;
-    }
+        }
 
-    echo '</ul>';
+        echo '</ul>';
+    }
 }
 
 

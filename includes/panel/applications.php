@@ -2,28 +2,29 @@
 
 function applications_list($user_id)
 {
-    echo '<style>.collection .collection-item.avatar{min-height:0;}</style>';
-    echo '<ul class="collection">';
-
     $user_id = clean_data($user_id);
-
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
-    foreach ($user_applications as $client_id => $scope) {
-        $client = sql_select('clients', 'redirect_uri,user_id,name,logo_url,description', "client_id='{$client_id}'", true);
-        $owner = sql_select('users', 'username', "id='{$client['user_id']}'", true);
+    if (!empty($user_applications)) {
+        echo '<style>.collection .collection-item.avatar{min-height:0;}</style>';
+        echo '<ul class="collection">';
 
-        echo <<<HTML
-        <li class="collection-item avatar">
-            <a href="/application?id={$client_id}">
-                <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client_id}.png'"> <span class="title">{$client['name']}</span>
-            </a>
-                <p>Owned by <span class="blue-text">{$owner['username']}</span></p>
-        </li>
+        foreach ($user_applications as $client_id => $scope) {
+            $client = sql_select('clients', 'redirect_uri,user_id,name,logo_url,description', "client_id='{$client_id}'", true);
+            $owner = sql_select('users', 'username', "id='{$client['user_id']}'", true);
+
+            echo <<<HTML
+            <li class="collection-item avatar">
+                <a href="/application?id={$client_id}">
+                    <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client_id}.png'"> <span class="title">{$client['name']}</span>
+                </a>
+                    <p>Owned by <span class="blue-text">{$owner['username']}</span></p>
+            </li>
 HTML;
-    }
+        }
 
-    echo '</ul>';
+        echo '</ul>';
+    }
 }
 
 
@@ -99,7 +100,7 @@ HTML;
     }
 
     if (!$user_has_authorized) {
-        redirect('/home', "Application isn't authorized.");
+        redirect('/home', 'Application unknown.');
     }
 
     echo <<<HTML
