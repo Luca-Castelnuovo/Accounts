@@ -14,22 +14,22 @@ page_header('Users');
             <tr>
                 <th>Picture</th>
                 <th>Username</th>
-                <th>Email (with link)</th>
-                <th>Verified  (toggle btn)</th>
-                <th>Developer (toggle btn)</th>
-                <th>Admin  (toggle btn)</th>
+                <th>Email</th>
+                <th>Verified</th>
+                <th>Developer</th>
+                <th>Admin</th>
                 <th>Created</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr>
+            <tr id="12">
                 <td><img src="https://avatars3.githubusercontent.com/u/26206253"></td>
                 <td>ltcastelnuovo</td>
                 <td><a href="mailto:ltcastelnuovo@gmail.com">ltcastelnuovo@gmail.com</a></td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+                <td><a href="#!" class="btn waves-effect green accent-4">Toggle (currently: true)</a></td>
+                <td><a href="#!" class="btn waves-effect green accent-4">Toggle (currently: true)</a></td>
+                <td><a href="#!" class="btn waves-effect green accent-4">Toggle (currently: true)</a></td>
                 <td>2018-12-14 19:09:47</td>
             </tr>
         </tbody>
