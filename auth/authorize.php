@@ -38,7 +38,7 @@ if (!empty($scopes)) {
     $scope_array = explode(',', $scopes);
 }
 
-if (!in_array('basic:read') && !in_array('basic')) {
+if (!in_array('basic:read', $scope_array) && !in_array('basic', $scope_array)) {
     array_push($scope_array, 'basic:read');
 }
 
