@@ -2,7 +2,7 @@
 
 function loggedin()
 {
-    $encoded_url = url_encode($GLOBALS['config']->app->url . $_SERVER['REQUEST_URI']);
+    $encoded_url = urlencode($GLOBALS['config']->app->url . $_SERVER['REQUEST_URI']);
 
     if ((!$_SESSION['logged_in']) || ($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) || (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800))) {
         redirect("/?reset&redirect_uri={$encoded_url}", 'Please login');
@@ -74,17 +74,12 @@ function reset_session()
     session_start();
 
     if (isset($_GET['redirect_uri'])) {
-        redirect('/?redirect_uri=' . $_GET['redirect_uri'], $alert);
+        redirect('/?redirect_uri=' . urlencode($_GET['redirect_uri']), $alert);
     } else {
         redirect('/', $alert);
     }
 }
 
-
-function url_encode($url)
-{
-    return urlencode($url);
-}
 
 function url_decode($url)
 {
