@@ -11,19 +11,19 @@ if (isset($_GET['CSRFtoken']) && isset($_GET['id']) && isset($_GET['type']) && i
         case 'verified':
             sql_update('users', [
                 'email_verified' => $status
-            ], "username='{$id}'");
+            ], "id='{$id}'");
             break;
         case 'developer':
             sql_update('users', [
                 'developer' => $status
-            ], "username='{$id}'");
+            ], "id='{$id}'");
             break;
         case 'admin':
             sql_update('users', [
                 'admin' => $status
-            ], "username='{$id}'");
+            ], "id='{$id}'");
             break;
-}
+    }
 }
 
 page_header('Users');
