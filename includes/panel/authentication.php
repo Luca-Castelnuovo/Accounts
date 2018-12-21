@@ -11,6 +11,14 @@ function loggedin()
     }
 }
 
+function loggedin_admin() {
+    loggedin();
+
+    if (!$_SESSION['admin']) {
+        redirect('/home', 'This page is only accessible by admins.');
+    }
+}
+
 
 function rememberme($redirect_uri = null)
 {
