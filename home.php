@@ -33,12 +33,12 @@ page_header('Home');
     <h4>Admin Panel</h4>
     <div class="row">
         <a href="/admin/users" class="col s12 m5 btn waves-effect blue accent-4">Users</a>
-        <div class="col m1"></div>
+        <div class="col m2"></div>
         <a href="/admin/clients" class="col s12 m5 btn waves-effect blue accent-4">Clients</a>
     </div>
     <div class="row">
         <a href="/admin/revoke?CSRFtoken=<?= csrf_gen() ?>&type=access_token" class="col s12 m5 btn waves-effect blue accent-4" onclick="return confirm('Are you sure?')">Revoke access tokens</a>
-        <div class="col m1"></div>
+        <div class="col m2"></div>
         <a href="/admin/revoke?CSRFtoken=<?= csrf_gen() ?>&type=authorization_code" class="col s12 m5 btn waves-effect blue accent-4" onclick="return confirm('Are you sure?')">Revoke authorization codes</a>
     </div>
     <div class="row">
