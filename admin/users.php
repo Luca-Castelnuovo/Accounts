@@ -12,16 +12,19 @@ if (isset($_GET['CSRFtoken']) && isset($_GET['id']) && isset($_GET['type']) && i
             sql_update('users', [
                 'email_verified' => $status
             ], "id='{$id}'");
+            redirect("/admin/users#{$id}", 'User updated.');
             break;
         case 'developer':
             sql_update('users', [
                 'developer' => $status
             ], "id='{$id}'");
+            redirect("/admin/users#{$id}", 'User updated.');
             break;
         case 'admin':
             sql_update('users', [
                 'admin' => $status
             ], "id='{$id}'");
+            redirect("/admin/users#{$id}", 'User updated.');
             break;
     }
 }
