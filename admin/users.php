@@ -46,7 +46,7 @@ page_header('Users');
 
         <tbody>
             <?php
-            $users = sql_select('users', 'id,username,email,email_verified,picture_url,created,applications,developer,admin', "true", true);
+            $users = sql_select('users', 'id,username,email,email_verified,picture_url,created,applications,developer,admin', "true", false);
 
             while ($user = $users->fetch_assoc()) {
                 $CSRFtoken = csrf_gen();
