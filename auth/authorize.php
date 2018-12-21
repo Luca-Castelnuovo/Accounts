@@ -102,15 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
             $user_applications[$client_id] = [];
         }
 
+        //Merge requested scopes with existing scopes
+        $not_unique_scopes = array_merge($user_applications[$client_id], $scope_array);
+
         // Remove duplicate scope
-        print_r($user_applications[$client_id]);
-        print_r($scope_array);
-        $unique_scope_db = array_diff($user_applications[$client_id], $scope_array);
-        print_r($unique_scope_db);
-        $unique_scope_request = array_diff($scope_array, $user_applications[$client_id]);
-        print_r($unique_scope_request);
-        $unique_scopes = array_merge($unique_scope_db, $unique_scope_request);
-        print_r($unique_scopes);
+        $unique_scopes = array_unique($not_unique_scopes);
 
         // Remove the old scope for client_id
         unset($user_applications[$client_id]);
