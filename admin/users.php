@@ -62,12 +62,12 @@ page_header('Users');
                 }
 
                 if ($user['developer']) {
-                    $developer_text = 'green';
-                    $developer_class = 'True';
+                    $developer_class = 'green';
+                    $developer_text = 'True';
                     $developer_toggle = 'false';
                 } else {
-                    $developer_text = 'red';
-                    $developer_class = 'False';
+                    $developer_class = 'red';
+                    $developer_text = 'False';
                     $developer_toggle = 'true';
                 }
 
@@ -94,15 +94,6 @@ page_header('Users');
 HTML;
             }
             ?>
-            <tr id="12">
-                <td><img src="https://avatars3.githubusercontent.com/u/26206253" class="responsive-img" width="100"></td>
-                <td>ltcastelnuovo</td>
-                <td><a href="mailto:ltcastelnuovo@gmail.com">ltcastelnuovo@gmail.com</a></td>
-                <td><a href="#!" class="btn waves-effect green accent-4">True</a></td>
-                <td><a href="#!" class="btn waves-effect red accent-4">False</a></td>
-                <td><a href="#!" class="btn waves-effect green accent-4">True</a></td>
-                <td>2018-12-14 19:09:47</td>
-            </tr>
         </tbody>
     </table>
 </div>
