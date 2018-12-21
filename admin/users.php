@@ -24,7 +24,7 @@ page_header('Users');
 
         <tbody>
             <tr id="12">
-                <td><img src="https://avatars3.githubusercontent.com/u/26206253"></td>
+                <td><img src="https://avatars3.githubusercontent.com/u/26206253" class="responsive-img" width="250"></td>
                 <td>ltcastelnuovo</td>
                 <td><a href="mailto:ltcastelnuovo@gmail.com">ltcastelnuovo@gmail.com</a></td>
                 <td><a href="#!" class="btn waves-effect green accent-4">Toggle (currently: true)</a></td>
