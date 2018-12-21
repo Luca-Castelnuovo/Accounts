@@ -9,8 +9,6 @@ function applications_list($user_id)
 
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
-    sort($user_applications);
-
     foreach ($user_applications as $client_id => $scope) {
         $client = sql_select('clients', 'redirect_uri,user_id,name,logo_url,description', "client_id='{$client_id}'", true);
         $owner = sql_select('users', 'username', "id='{$client['user_id']}'", true);
