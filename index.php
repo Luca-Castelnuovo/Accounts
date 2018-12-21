@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_val($_POST['CSRFtoken'], '/');
     captcha_val($_POST['g-recaptcha-response'], '/');
 
-    $user = sql_select('users', 'id,password,email_verified', "username='{$username}' OR email='{$username}'", true);
+    $user = sql_select('users', 'id,password,email_verified,developer', "username='{$username}' OR email='{$username}'", true);
 
     if (!password_verify($password, $user['password'])) {
         redirect('/', 'Username or password is incorrect.');
@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['logged_in'] = true;
     $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
     $_SESSION['id'] = $user['id'];
+    $_SESSION['developer'] = $user['developer'];
 
     $redirect_uri = url_decode($_GET['redirect_uri']);
 

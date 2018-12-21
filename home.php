@@ -15,6 +15,7 @@ page_header('Home');
     <h4>Authorized Apps</h4>
     <?= applications_list($_SESSION['id']); ?>
 </div>
+<?php if ($_SESSION['developer']) { ?>
 <div class="row">
     <div class="row">
         <div class="col s12 m9">
@@ -26,5 +27,6 @@ page_header('Home');
     </div>
     <?= clients_list($_SESSION['id']); ?>
 </div>
+<?php } ?>
 
 <?= page_footer(); ?>
