@@ -32,15 +32,17 @@ page_header('Home');
 <div class="row">
     <h4>Admin Panel</h4>
     <div class="row">
-        <a href="/client/add" class="col s12 m6 btn waves-effect blue accent-4">Users</a>
-        <a href="/client/add" class="col s12 m6 btn waves-effect blue accent-4">Clients</a>
+        <a href="/admin/users" class="col s12 m5 btn waves-effect blue accent-4">Users</a>
+        <div class="col m1"></div>
+        <a href="/admin/clients" class="col s12 m5 btn waves-effect blue accent-4">Clients</a>
     </div>
     <div class="row">
-        <a href="/admin/revoke?CSRFtoken=<?= $CSRFtoken ?>&type=access_token" class="col s12 m6 btn waves-effect blue accent-4" onclick="return confirm('Are you sure?')">Revoke access tokens</a>
-        <a href="/admin/revoke?CSRFtoken=<?= $CSRFtoken ?>&type=authorization_code" class="col s12 m6 btn waves-effect blue accent-4" onclick="return confirm('Are you sure?')">Revoke authorization codes</a>
+        <a href="/admin/revoke?CSRFtoken=<?= csrf_gen() ?>&type=access_token" class="col s12 m5 btn waves-effect blue accent-4" onclick="return confirm('Are you sure?')">Revoke access tokens</a>
+        <div class="col m1"></div>
+        <a href="/admin/revoke?CSRFtoken=<?= csrf_gen() ?>&type=authorization_code" class="col s12 m5 btn waves-effect blue accent-4" onclick="return confirm('Are you sure?')">Revoke authorization codes</a>
     </div>
     <div class="row">
-        <a href="/admin/revoke?CSRFtoken=<?= $CSRFtoken ?>&type=all" class="col s12 btn waves-effect red accent-4" onclick="return confirm('Are you sure?')">Revoke access tokens, authorization codes, user applications</a>
+        <a href="/admin/revoke?CSRFtoken=<?= csrf_gen() ?>&type=all" class="col s12 btn waves-effect red accent-4" onclick="return confirm('Are you sure?')">Revoke access tokens, authorization codes, user applications</a>
     </div>
 </div>
 <?php } ?>
