@@ -31,7 +31,10 @@ page_header('Clients');
 ?>
 
 <div class="row">
-    <style>i {color: #2962FF;}</style>
+    <style>
+        i {color: #2962FF;}
+        .collection .collection-item.avatar{min-height:0}
+    </style>
     <ul class="collection">
         <?php
 

@@ -12,9 +12,13 @@ page_header('Users');
     <table>
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Item Name</th>
-                <th>Item Price</th>
+                <th>Picture</th>
+                <th>Username</th>
+                <th>Email (with link)</th>
+                <th>Verified  (toggle btn)</th>
+                <th>Developer (toggle btn)</th>
+                <th>Admin  (toggle btn)</th>
+                <th>Created</th>
             </tr>
         </thead>
 
