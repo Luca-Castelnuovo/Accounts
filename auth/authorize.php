@@ -103,6 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
         }
 
         // Remove duplicate scope
+        print_r($user_applications[$client_id]);
+        print_r($scope_array);
         $unique_scope_db = array_diff($user_applications[$client_id], $scope_array);
         print_r($unique_scope_db);
         $unique_scope_request = array_diff($scope_array, $user_applications[$client_id]);
