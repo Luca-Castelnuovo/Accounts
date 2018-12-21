@@ -34,9 +34,13 @@ if (empty($redirect_uri)) {
 }
 
 // List scopes
-$scope_array = ['basic:read'];
 if (!empty($scopes)) {
-    $scope_array = explode(',', $scopes);
+    $scope_tmp = explode(',', $scopes);
+    if (!in_array('basic',$scope_tmp)) {
+        $scope_array = ['basic:read'];
+    }
+
+    $scope_array = $scope_tmp;
 }
 
 $scope_array = array_unique($scope_array);
