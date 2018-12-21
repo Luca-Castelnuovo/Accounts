@@ -30,6 +30,7 @@ page_header('Home');
 <?php } ?>
 <?php if ($_SESSION['admin']) { ?>
 <div class="row">
+    <h4>Admin Panel</h4>
     <div class="row">
         <a href="/client/add" class="col s12 m6 btn waves-effect blue accent-4">Users</a>
         <a href="/client/add" class="col s12 m6 btn waves-effect blue accent-4">Clients</a>
