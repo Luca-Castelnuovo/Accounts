@@ -34,7 +34,7 @@ page_header('Users');
 ?>
 
 <div class="row">
-    <table>
+    <table class="responsive-table">
         <thead>
             <tr>
                 <th>Picture</th>
