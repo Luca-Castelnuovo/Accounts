@@ -104,8 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
 
         // Remove duplicate scope
         $unique_scope_db = array_diff($user_applications[$client_id], $scope_array);
+        print_r($unique_scope_db);
         $unique_scope_request = array_diff($scope_array, $user_applications[$client_id]);
+        print_r($unique_scope_request);
         $unique_scopes = array_merge($unique_scope_db, $unique_scope_request);
+        print_r($unique_scopes);
 
         // Remove the old scope for client_id
         unset($user_applications[$client_id]);
@@ -115,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
 
         // Merge other clients with current client
         $user_applications = json_encode($user_applications + $unique_scopes_assoc);
+        print_r($user_applications);
 
         // Update user
         sql_update('users', ['applications' => $user_applications], "id='{$user['id']}'");
