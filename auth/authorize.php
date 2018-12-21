@@ -34,6 +34,7 @@ if (empty($redirect_uri)) {
 }
 
 // List scopes
+$scope_array = [];
 if (!empty($scopes)) {
     $scope_array = explode(',', $scopes);
 }
