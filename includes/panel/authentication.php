@@ -2,18 +2,12 @@
 
 function loggedin()
 {
-    if (!$_SESSION['logged_in']) {
-        redirect('/?reset&redirect_uri=' . url_encode($GLOBALS['config']->app->url . $_SERVER['REQUEST_URI']), 'Please login');
-    }
+    $encoded_url = url_encode($GLOBALS['config']->app->url . $_SERVER['REQUEST_URI']);
 
-    if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
-        redirect('/?reset&redirect_uri=' . url_encode($GLOBALS['config']->app->url . $_SERVER['REQUEST_URI']), 'Please login');
+    if ((!$_SESSION['logged_in']) || ($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) || (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800))) {
+        redirect("/?reset&redirect_uri={$encoded_url}", 'Please login');
     } else {
         $_SESSION['LAST_ACTIVITY'] = time();
-    }
-
-    if ($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
-        redirect('/?reset&redirect_uri=' . url_encode($GLOBALS['config']->app->url . $_SERVER['REQUEST_URI']), 'Please login');
     }
 }
 
