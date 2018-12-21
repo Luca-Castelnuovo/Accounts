@@ -6,9 +6,6 @@ loggedin_admin();
 
 csrf_val($_GET['CSRFtoken']);
 
-$token_GET = check_data($_GET['token'], true, 'Token', true, true, '/home');
-$token = sql_select('general_tokens', 'revoked,expires,user_id', "token='{$token_GET}' AND type='developer_request'", true);
-
 switch ($_GET['type']) {
     case 'access_token':
         sql_delete('access_tokens', 'true');

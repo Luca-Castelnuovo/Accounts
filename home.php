@@ -51,7 +51,7 @@ page_header('Home');
         <a href="/admin/revoke?CSRFtoken=<?= csrf_gen() ?>&type=authorization_code" class="col s12 m5 btn waves-effect blue accent-4" onclick="return confirm('Are you sure?')">Revoke authorization codes</a>
     </div>
     <div class="row">
-        <a href="/admin/revoke?CSRFtoken=<?= csrf_gen() ?>&type=all" class="col s12 btn waves-effect red accent-4" onclick="return confirm('Are you sure?')">Revoke access tokens, authorization codes, user applications</a>
+        <a href="/admin/revoke?CSRFtoken=<?= csrf_gen() ?>&type=all" class="col s12 btn waves-effect red accent-4" onclick="return confirm('Are you sure?')">Revoke all</a>
     </div>
 </div>
 <?php } ?>
