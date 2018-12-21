@@ -30,7 +30,7 @@ page_header('Home');
 <?php } ?>
 <?php if (!$_SESSION['developer']) { ?>
 <div class="row">
-    <?php $user = sql_select('users', 'username,email', "id='{$_SESSION['id']}'"); ?>
+    <?php $user = sql_select('users', 'username,email', "id='{$_SESSION['id']}'", true); ?>
     <a href="mailto:ltcastelnuovo@gmail.com?subject=Request Developer Account || LTCAuth&body=Username: <?= $user['username'] ?>%0AEmail: <?= $user['email'] ?>%0AWants developer account." class="btn waves-effect blue accent-4">Request developer account</a>
 </div>
 <?php } ?>
