@@ -24,19 +24,13 @@ page_header('Users');
 
         <tbody>
             <tr>
-                <td>Alvin</td>
-                <td>Eclair</td>
-                <td>$0.87</td>
-            </tr>
-            <tr>
-                <td>Alan</td>
-                <td>Jellybean</td>
-                <td>$3.76</td>
-            </tr>
-            <tr>
-                <td>Jonathan</td>
-                <td>Lollipop</td>
-                <td>$7.00</td>
+                <td><img src="https://avatars3.githubusercontent.com/u/26206253"></td>
+                <td>ltcastelnuovo</td>
+                <td><a href="mailto:ltcastelnuovo@gmail.com">ltcastelnuovo@gmail.com</a></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>2018-12-14 19:09:47</td>
             </tr>
         </tbody>
     </table>
