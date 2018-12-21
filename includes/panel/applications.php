@@ -84,7 +84,7 @@ HTML;
         $scope_data = sql_select('scopes', 'title,description', "scope='{$scope}'", true);
         echo <<<HTML
         <li>
-            <p><b>{$scope_data['title']}: </b>{$scope_data['description']}</p>
+            <p><b>{$scope}: </b>{$scope_data['description']}</p>
         </li>
 HTML;
     }
