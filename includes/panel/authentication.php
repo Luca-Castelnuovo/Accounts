@@ -37,6 +37,11 @@ function rememberme($redirect_uri = null)
     $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
     $_SESSION['id'] = $user_id;
 
+    $user = sql_select('users', 'developer,admin', "id='{$user_id}'", true);
+
+    $_SESSION['developer'] = $user['developer'];
+    $_SESSION['admin'] = $user['admin'];
+
     session_regenerate_id(true);
 
     if (isset($_GET['redirect_uri'])) {
