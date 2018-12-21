@@ -9,7 +9,6 @@ page_header('Users');
 ?>
 
 <div class="row">
-    <h4>Users</h4>
     <table>
         <thead>
             <tr>
