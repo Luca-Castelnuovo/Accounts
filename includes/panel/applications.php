@@ -21,6 +21,13 @@ function applications_list($user_id)
         if ($read_scope !== false) {
             unset($user_applications[$read_scope]);
         }
+    }
+
+    foreach ($user_applications as $client_id => $scope) {
+        $read_scope = array_search($scope . ':read', $user_applications);
+        if ($read_scope !== false) {
+            unset($user_applications[$read_scope]);
+        }
 
         $client = sql_select('clients', 'redirect_uri,user_id,name,logo_url,description', "client_id='{$client_id}'", true);
         $owner = sql_select('users', 'username', "id='{$client['user_id']}'", true);
