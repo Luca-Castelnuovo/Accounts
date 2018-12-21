@@ -49,7 +49,7 @@ page_header('Clients');
             echo <<<HTML
             <li class="collection-item avatar">
                 <img class="circle" src="{$client['logo_url']}" onerror="this.src='https://github.com/identicons/{$client['client_id']}.png'">
-                <span class="title">{$client['name']} - By <a href="/admin/users{$user['id']}">{$user['username']}</a></span>
+                <span class="title">{$client['name']} - By <a href="/admin/users#{$user['id']}">{$user['username']}</a></span>
                 <p>{$description}</p>
                 <a href="/admin/clients?delete={$client['client_id']}&CSRFtoken={$CSRFtoken}" class="secondary-content icon-blue accent-4"><i class="material-icons">delete</i></a>
             </li>
