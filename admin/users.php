@@ -57,31 +57,31 @@ page_header('Users');
                 if ($user['email_verified']) {
                     $verified_class = 'green';
                     $verified_text = 'True';
-                    $verified_toggle = 'false';
+                    $verified_toggle = '0';
                 } else {
                     $verified_class = 'red';
                     $verified_text = 'False';
-                    $verified_toggle = 'true';
+                    $verified_toggle = '1';
                 }
 
                 if ($user['developer']) {
                     $developer_class = 'green';
                     $developer_text = 'True';
-                    $developer_toggle = 'false';
+                    $developer_toggle = '0';
                 } else {
                     $developer_class = 'red';
                     $developer_text = 'False';
-                    $developer_toggle = 'true';
+                    $developer_toggle = '1';
                 }
 
                 if ($user['admin']) {
                     $admin_class = 'green';
                     $admin_text = 'True';
-                    $admin_toggle = 'false';
+                    $admin_toggle = '0';
                 } else {
                     $admin_class = 'red';
                     $admin_text = 'False';
-                    $admin_toggle = 'true';
+                    $admin_toggle = '1';
                 }
 
                 echo <<<HTML
