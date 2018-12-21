@@ -38,9 +38,11 @@ if (!empty($scopes)) {
     $scope_tmp = explode(',', $scopes);
     if (!in_array('basic',$scope_tmp)) {
         $scope_array = ['basic:read'];
+    } else {
+        $scope_array = [];
     }
 
-    $scope_array = $scope_tmp;
+    $scope_array = array_merge($scope_array, $scope_tmp);
 }
 
 $scope_array = array_unique($scope_array);
