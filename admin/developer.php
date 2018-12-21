@@ -21,4 +21,4 @@ sql_update('general_tokens', [
     'revoked' => '1'
 ], "token='{$token_GET}' AND type='developer_request'");
 
-redirect('/home', 'Developer privileges granted.');
+redirect("/admin/users#{$token['user_id']}", 'Developer privileges granted.');
