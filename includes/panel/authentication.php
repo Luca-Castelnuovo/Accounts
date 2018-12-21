@@ -11,6 +11,14 @@ function loggedin()
     }
 }
 
+function loggedin_developer() {
+    loggedin();
+
+    if (!$_SESSION['developer']) {
+        redirect('/home', 'This page is only accessible by developers.');
+    }
+}
+
 function loggedin_admin() {
     loggedin();
 
