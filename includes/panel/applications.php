@@ -11,24 +11,7 @@ function applications_list($user_id)
 
     sort($user_applications);
 
-    $item = array_search('Linus Trovalds', $user_applications);
-    if ($item !== false) {
-        unset($user_applications[$item]);
-    }
-
     foreach ($user_applications as $client_id => $scope) {
-        $read_scope = array_search($scope . ':read', $user_applications);
-        if ($read_scope !== false) {
-            unset($user_applications[$read_scope]);
-        }
-    }
-
-    foreach ($user_applications as $client_id => $scope) {
-        $read_scope = array_search($scope . ':read', $user_applications);
-        if ($read_scope !== false) {
-            unset($user_applications[$read_scope]);
-        }
-
         $client = sql_select('clients', 'redirect_uri,user_id,name,logo_url,description', "client_id='{$client_id}'", true);
         $owner = sql_select('users', 'username', "id='{$client['user_id']}'", true);
 
@@ -95,7 +78,16 @@ HTML;
 
     $user_has_authorized = false;
 
-    foreach ($user_applications[$client_id] as $client_id => $scope) {
+    sort($user_applications[$client_id]);
+
+    foreach ($user_applications[$client_id] as $scope) {
+    $read_scope = array_search($scope . ':read', $user_applications[$client_id]);
+    if ($read_scope !== false) {
+        unset($user_applications[$client_id][$read_scope]);
+    }
+}
+
+    foreach ($user_applications[$client_id] as $scope) {
         if (!empty($scope)) {
             $user_has_authorized = true;
         }
