@@ -119,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $user_application_match) {
         // Merge other clients with current client
         $user_applications = json_encode($user_applications + $unique_scopes_assoc);
         print_r($user_applications);
+        exit;
 
         // Update user
         sql_update('users', ['applications' => $user_applications], "id='{$user['id']}'");
