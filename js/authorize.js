@@ -16,8 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             authorizeBtn.classList.remove("hide");
             authorizeRedirect.classList.remove("hide");
-        }).catch(function(error) {
-            location.reload();
         });
     });
 });

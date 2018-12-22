@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
             loaderContainer.parentNode.removeChild(loaderContainer);
             recaptchaResponse.value = token;
             submitBtn.classList.remove("hide");
-        }).catch(function(error) {
-            location.reload();
         });
     });
 });
