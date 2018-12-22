@@ -11,6 +11,7 @@ page_header('Home');
 <style>
     .mt-1_52rem{margin-top:1.52rem}
     .collection .collection-item.avatar{min-height:0;}
+    .p-0{padding:0;}
 </style>
 <div class="row">
     <h4>Authorized Apps</h4>
@@ -20,10 +21,10 @@ page_header('Home');
 <?php if ($_SESSION['developer']) { ?>
 <div class="row">
     <div class="row">
-        <div class="col s12 m9">
+        <div class="col s12 m9 p-0">
             <h4>Your clients</h4>
         </div>
-        <div class="col s12 m3">
+        <div class="col s12 m3 p-0">
             <a href="/client/add" class="btn waves-effect blue accent-4 mt-1_52rem">Create client</a>
         </div>
     </div>
