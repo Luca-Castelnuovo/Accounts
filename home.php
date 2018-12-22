@@ -10,6 +10,7 @@ page_header('Home');
 
 <style>
     .mt-1_52rem{margin-top:1.52rem}
+    .collection .collection-item.avatar{min-height:0;}
 </style>
 <div class="row">
     <h4>Authorized Apps</h4>

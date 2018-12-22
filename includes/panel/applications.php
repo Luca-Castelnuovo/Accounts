@@ -6,7 +6,6 @@ function applications_list($user_id)
     $user_applications = json_decode(sql_select('users', 'applications', "id='{$user_id}'", true)['applications'], true);
 
     if (!empty($user_applications)) {
-        echo '<style>.collection .collection-item.avatar{min-height:0;}</style>';
         echo '<ul class="collection">';
 
         foreach ($user_applications as $client_id => $scope) {
