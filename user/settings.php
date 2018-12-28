@@ -7,21 +7,13 @@ loggedin();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_val($_POST['CSRFtoken']);
 
-    $username = check_data($_POST['username'], true, 'Username', true, true, '/user/settings');
+    $user_id = $_SESSION['id'];
     $first_name = check_data($_POST['first_name'], true, 'First Name', true, true, '/user/settings');
     $last_name = check_data($_POST['last_name'], true, 'Last Name', true, true, '/user/settings');
     $email = check_data($_POST['email'], true, 'Email', true, true, '/user/settings');
     $picture_url = check_data($_POST['picture_url'], true, 'Picture', true, true, '/user/settings');
 
     $user = sql_select('users', 'username,email,password', "username='{$username}' OR email='{$email}'", true);
-
-    // Check if username is taken
-    if ($username != $user['username']) {
-        $existing_username = sql_select('users', 'id', "username='{$username}'", false);
-        if ($existing_username->num_rows > 0) {
-            redirect('/user/settings', 'Username is taken, please choose another.');
-        }
-    }
 
     // Check if email is taken
     if ($email != $user['email']) {
@@ -53,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     sql_update('users', [
-        'username' => $username,
         'first_name' => $first_name,
         'last_name' => $last_name,
         'email' => $email,
@@ -63,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect('/user/register', 'Account updated.');
 }
 
-$user = sql_select('users', 'first_name,last_name,email,username,picture_url', "id='{$_SESSION['id']}'", true);
+$user = sql_select('users', 'first_name,last_name,email,picture_url', "id='{$_SESSION['id']}'", true);
 
 page_header('Settings');
 
@@ -97,12 +88,6 @@ page_header('Settings');
                 <div class="input-field col s12">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required value="<?= $user['email'] ?>"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required value="<?= $user['username'] ?>"/>
                 </div>
             </div>
             <div class="row">
