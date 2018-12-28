@@ -9,7 +9,7 @@ function page_header($title = 'Unknown')
     <head>
         <title>{$title}</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="https://cdn.lucacastelnuovo.nl/general/css/materialize.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link rel="shortcut icon" href="/images/favicon.ico">
@@ -48,7 +48,7 @@ function page_footer()
     echo <<<HTML
             </div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdn.lucacastelnuovo.nl/general/js/materialize.js"></script>
         <script src="/js/init.js"></script>
 HTML;
     alert_display();
