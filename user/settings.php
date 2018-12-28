@@ -5,13 +5,13 @@ require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 loggedin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    csrf_val($CSRFtoken);
+    csrf_val($_POST['CSRFtoken']);
 
-    $username = check_data($username, true, 'Username', true, true, '/user/settings');
-    $first_name = check_data($first_name, true, 'First Name', true, true, '/user/settings');
-    $last_name = check_data($last_name, true, 'Last Name', true, true, '/user/settings');
-    $email = check_data($email, true, 'Email', true, true, '/user/settings');
-    $picture_url = check_data($picture_url, true, 'Picture', true, true, '/user/settings');
+    $username = check_data($_POST['username'], true, 'Username', true, true, '/user/settings');
+    $first_name = check_data($_POST['first_name'], true, 'First Name', true, true, '/user/settings');
+    $last_name = check_data($_POST['last_name'], true, 'Last Name', true, true, '/user/settings');
+    $email = check_data($_POST['email'], true, 'Email', true, true, '/user/settings');
+    $picture_url = check_data($_POST['picture_url'], true, 'Picture', true, true, '/user/settings');
 
     $user = sql_select('users', 'username,email,password', "username='{$username}' OR email='{$email}'", true);
 
