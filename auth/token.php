@@ -3,7 +3,7 @@ $no_session = true;
 require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    response(false, 'incorrect_html_method');
+    response(false, 'incorrect_request_method');
 }
 
 // Validate server
@@ -14,7 +14,12 @@ $authorization_code = check_data($_POST['code'], true, 'authorization_code', tru
 $state = check_data($_POST['state'], false, '', true);
 
 // Validate authorization code
-$authorization_code_sql = sql_select('authorization_codes', 'client_id,user_id,expires,scope,state,token_id', "authorization_code='{$authorization_code}'", true);
+$authorization_code_sql = sql_select(
+    'authorization_codes',
+    'client_id,user_id,expires,scope,state,token_id',
+    "authorization_code='{$authorization_code}'",
+    true
+);
 
 if ($authorization_code_sql['client_id'] != $client['id']) {
     response(false, 'bad_authorization_code');
@@ -46,9 +51,27 @@ sql_insert('access_tokens', [
     'scope' => $authorization_code_sql['scope'],
 ]);
 
-$token_id = sql_select('access_tokens', 'id', "access_token='{$access_token}'", true)['id'];
+$token_id = sql_select(
+    'access_tokens',
+    'id',
+    "access_token='{$access_token}'",
+    true
+)['id'];
 
-sql_update('authorization_codes', ['token_id' => $token_id], "authorization_code='{$authorization_code}'");
+sql_update(
+    'authorization_codes',
+    ['token_id' => $token_id],
+    "authorization_code='{$authorization_code}'"
+);
 
 $scope_array = json_decode($authorization_code_sql['scope']);
-response(true, '', ['access_token' => $access_token, 'scopes' => $scope_array]);
+
+response(
+    true,
+    '',
+    [
+        'access_token' => $access_token,
+        'token_type' => 'bearer',
+        'scope' => $scope_array
+    ]
+);
