@@ -1,11 +1,14 @@
-const authorizeBtn = document.querySelector('#authorizeBtn');
+const authorizeBtnAllow = document.querySelector('#authorizeBtnAllow');
+const authorizeBtnDeny = document.querySelector('#authorizeBtnDeny');
+
 const authorizeRedirect = document.querySelector('#authorizeRedirect');
 
 const loaderContainer = document.querySelector('#loaderContainer');
 const recaptchaResponse = document.querySelector('#recaptchaResponse');
 
 document.addEventListener('DOMContentLoaded', function() {
-    authorizeBtn.classList.add("hide");
+    authorizeBtnAllow.classList.add("hide");
+    authorizeBtnDeny.classList.add("hide");
     authorizeRedirect.classList.add("hide");
 
     grecaptcha.ready(function() {
@@ -14,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             recaptchaResponse.value = token;
 
-            authorizeBtn.classList.remove("hide");
+            authorizeBtnAllow.classList.remove("hide");
+            authorizeBtnDeny.classList.remove("hide");
             authorizeRedirect.classList.remove("hide");
         });
     });

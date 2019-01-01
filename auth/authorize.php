@@ -214,7 +214,8 @@ HTML;
                         <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                             <input type="hidden" name="CSRFtoken" value="<?= csrf_gen() ?>">
                             <input id="recaptchaResponse" type="hidden" name="g-recaptcha-response" value="null">
-                            <button id="authorizeBtn" class="col s12 btn-large waves-effect blue accent-4">Authorize <?= $client['name'] ?></button>
+                            <a href="<?= strtok($redirect_uri, '?') ?>?error=authorization_denied" id="authorizeBtnDeny" class="col s12 m6 btn-large waves-effect white black-text">Deny</a>
+                            <button id="authorizeBtnAllow" class="col s12 m6 btn-large waves-effect blue accent-4">Allow</button>
                         </form>
                     </div>
                     <div id="authorizeRedirect" class="row">
