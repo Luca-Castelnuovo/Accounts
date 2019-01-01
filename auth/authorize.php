@@ -31,6 +31,10 @@ if (!isset($client['id']) || empty($client['id'])) {
 // If not isset callback use default callback
 if (empty($redirect_uri)) {
     $redirect_uri = $client['redirect_uri'];
+} else {
+    if (substr($redirect_uri, 0, strlen($client['redirect_uri'])) !== $client['redirect_uri']) {
+        redirect("{$client['redirect_uri']}?error=redirect_uri_mismatch");
+    }
 }
 
 // List scopes
