@@ -3,7 +3,7 @@ $no_session = true;
 require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    response(false, 'incorrect_request_method');
+    response(false, 'invalid_request');
 }
 
 // Validate server
@@ -72,6 +72,7 @@ response(
     [
         'access_token' => $access_token,
         'token_type' => 'bearer',
-        'scope' => $scope_array
+        'scope' => $scope_array,
+        'expires' => $GLOBALS['config']->auth->expires->access_token
     ]
 );
