@@ -4,8 +4,16 @@ require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 
 loggedin();
 
+if (isset($$_GET['destroy_remember_me']) && isset($_GET['CSRFtoken'])) {
+    csrf_val($_GET['CSRFtoken'], '/settings');
+
+    sql_update('general_tokens', [
+        'revoked' => '1'
+    ], "user_id='{$_SESSION['id']}' AND type='remember_me'");
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    csrf_val($_POST['CSRFtoken']);
+    csrf_val($_POST['CSRFtoken'], '/settings');
 
     $user_id = $_SESSION['id'];
     $first_name = check_data($_POST['first_name'], true, 'First Name', true, true, '/user/settings');
@@ -133,6 +141,12 @@ page_header('Settings');
             <div class="col s12">
                 <input type="hidden" name="CSRFtoken" value="<?= csrf_gen() ?>"/>
                 <button class="col s12 btn-large waves-effect blue accent-4" type="submit">Update Account</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <a class="col s12 btn-large waves-effect blue accent-4" href="?destroy_remember_me&CSRFtoken=<?= csrf_gen() ?>" onclick="return confirm('Are you sure?')">Log out on other devices</a>
             </div>
         </div>
     </form>
