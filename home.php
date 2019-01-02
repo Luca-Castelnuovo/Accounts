@@ -12,6 +12,7 @@ page_header('Home');
     .mt-1_52rem{margin-top:1.52rem}
     .collection .collection-item.avatar{min-height:0;}
     .p-0{padding:0 !important;}
+    .mb-0 {margin-bottom: 0 !important;}
 </style>
 <div class="row">
     <h4>Authorized Apps</h4>
@@ -21,7 +22,7 @@ page_header('Home');
 <?php if ($_SESSION['developer']) { ?>
 <div class="row">
     <div class="row">
-        <div class="col s12 m9 p-0">
+        <div class="col s12 m9 p-0 mb-0">
             <h4>Your clients</h4>
         </div>
         <div class="col s12 m3 p-0">
