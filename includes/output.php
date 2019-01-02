@@ -77,7 +77,7 @@ function send_mail($to, $subject, $body)
 
 
 // Log stuff
-function log_action($action, $client_id = null, $user_id = null) {
+function log_action($action, $client_id = 'not_set', $user_id = 'not_set') {
     $action = clean_data($action);
     $time = date('Y-m-d H:i:s');
     $user_id = clean_data($user_id);
