@@ -22,7 +22,7 @@ page_header('Logs');
 
         <tbody>
             <?php
-            $logs = sql_select('logs', 'id,action,time,user_id,client_id,ip', "true", false);
+            $logs = sql_select('logs', 'id,action,time,user_id,client_id,ip', "true ORDER BY time DESC", false);
 
             while ($log_item = $logs->fetch_assoc()) {
                 echo <<<HTML
