@@ -155,8 +155,8 @@ HTML;
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <label for="picture_url">Picture URL</label>
-                            <input type="text" id="picture_url" name="picture_url" required/>
+                            <label for="picture_url">Picture URL (optional)</label>
+                            <input type="text" id="picture_url" name="picture_url"/>
                         </div>
                     </div>
                     <div class="row">
