@@ -10,33 +10,49 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $client = client_validation($_POST['client_id'], $_POST['client_secret']);
 
 // Input
-$authorization_code = check_data($_POST['code'], true, 'authorization_code', true);
-$state = check_data($_POST['state'], false, '', true);
+$grant_type = check_data($_POST['grant_type'], true, 'grant_type', true);
 
-// Validate authorization code
-$authorization_code_sql = sql_select(
-    'authorization_codes',
-    'client_id,user_id,expires,scope,state,token_id',
-    "authorization_code='{$authorization_code}'",
-    true
-);
+switch ($grant_type) {
+    case 'client_credentials':
+        $authorization_code_sql['client_id'] = $client['id'];
+        $authorization_code_sql['user_id'] = 'not_set';
+        $authorization_code_sql['scope'] = json_encode(['client_credentials']);
+        break;
 
-if ($authorization_code_sql['client_id'] != $client['id']) {
-    response(false, 'bad_authorization_code');
-}
+    case 'authorization_code':
+        $authorization_code = check_data($_POST['code'], true, 'authorization_code', true);
+        $state = check_data($_POST['state'], false, '', true);
 
-if ($authorization_code_sql['expires'] <= time()) {
-    response(false, 'bad_authorization_code');
-}
+        // Validate authorization code
+        $authorization_code_sql = sql_select(
+            'authorization_codes',
+            'client_id,user_id,expires,scope,state,token_id',
+            "authorization_code='{$authorization_code}'",
+            true
+        );
 
-if (isset($authorization_code_sql['token_id']) && !empty($authorization_code_sql['token_id'])) {
-    response(false, 'bad_authorization_code');
-}
+        if ($authorization_code_sql['client_id'] != $client['id']) {
+            response(false, 'bad_authorization_code');
+        }
 
-if (isset($authorization_code_sql['state']) && !empty($authorization_code_sql['state'])) {
-    if ($authorization_code_sql['state'] != $state) {
-        response(false, 'bad_authorization_code');
-    }
+        if ($authorization_code_sql['expires'] <= time()) {
+            response(false, 'bad_authorization_code');
+        }
+
+        if (isset($authorization_code_sql['token_id']) && !empty($authorization_code_sql['token_id'])) {
+            response(false, 'bad_authorization_code');
+        }
+
+        if (isset($authorization_code_sql['state']) && !empty($authorization_code_sql['state'])) {
+            if ($authorization_code_sql['state'] != $state) {
+                response(false, 'bad_authorization_code');
+            }
+        }
+        break;
+
+    default:
+        response(false, 'invalid_grant_type');
+        break;
 }
 
 // Create access token`
@@ -71,7 +87,6 @@ response(
     '',
     [
         'access_token' => $access_token,
-        'token_type' => 'bearer',
         'scope' => $scope_array,
         'expires' => $GLOBALS['config']->auth->expires->access_token
     ]

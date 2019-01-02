@@ -65,7 +65,7 @@ function client_info($user_id, $client_id)
                     <input type="text" id="client_secret" value="{$client['client_secret']}" readonly />
                 </div>
                 <div class="col s12 m3">
-                    <a href="?reset={$client_id}&CSRFtoken={$CSRFtoken}" class="btn-large waves-effect red accent-4" onclick="return confirm('Are you sure?')">Reset secret</a>
+                    <a href="?reset={$client_id}&CSRFtoken={$CSRFtoken}" class=" col s12 btn-large waves-effect red accent-4" onclick="return confirm('Are you sure?')">Reset secret</a>
                 </div>
             </div>
         </div>
