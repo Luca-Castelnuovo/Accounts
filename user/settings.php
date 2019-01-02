@@ -24,10 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Check if user wants to update password
-    if (!empty($password)) {
-        $password = check_data($password, true, 'Old Password', true, true, '/user/settings');
-        $new_password = check_data($new_password, true, 'New Password', true, true, '/user/settings');
-        $new_password_confirm = check_data($new_password_confirm, true, 'New Password Confirm', true, true, '/user/settings');
+    if (!empty($_POST['password'])) {
+        $password = check_data($_POST['password'], true, 'Old Password', true, true, '/user/settings');
+        $new_password = check_data($_POST['password_confirm'], true, 'New Password', true, true, '/user/settings');
+        $new_password_confirm = check_data($_POST['new_password_confirm'], true, 'New Password Confirm', true, true, '/user/settings');
 
         // Verify old password
         if (!password_verify($password, $user['password'])) {
