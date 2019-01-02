@@ -55,7 +55,7 @@ function redirect($to, $alert = null)
 function send_mail($to, $subject, $body)
 {
     $access_token = request(
-        'https://api.lucacastelnuovo.nl/mail/',
+        'https://accounts.lucacastelnuovo.nl/auth/token',
         [
             "grant_type" => "client_credentials",
             "client_id" => "{$GLOBALS['config']->client_id}",

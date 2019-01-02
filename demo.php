@@ -15,6 +15,10 @@ $token = request(
 
 print_r($token);
 
+$to = 'o6469821@nwytg.net';
+$subject = 'example';
+$body = 'test';
+
 print_r(request(
     'https://api.lucacastelnuovo.nl/mail/',
     [
