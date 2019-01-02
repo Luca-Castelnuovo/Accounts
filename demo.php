@@ -5,7 +5,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/includes/init.php');
 loggedin_developer();
 
 $token = request(
-    'https://api.lucacastelnuovo.nl/mail/',
+    'https://accounts.lucacastelnuovo.nl/auth/token',
     [
         "grant_type" => "client_credentials",
         "client_id" => "{$GLOBALS['config']->client_id}",
