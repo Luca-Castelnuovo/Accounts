@@ -54,9 +54,43 @@ function redirect($to, $alert = null)
 // Send mails to users
 function send_mail($to, $subject, $body)
 {
-    // $access_token = access_token();
-    $access_token = '1234';
-    return request('https://api.lucacastelnuovo.nl/mail/', ["access_token" => "{$access_token}", "to" => "{$to}", "subject" => "{$subject}", "body" => "{$body}", "from_name" => "LTC Auth"]);
+    $access_token = request(
+        'https://api.lucacastelnuovo.nl/mail/',
+        [
+            "grant_type" => "client_credentials",
+            "client_id" => "{$GLOBALS['config']->client_id}",
+            "client_secret" => "{$GLOBALS['config']->client_secret}"
+        ]
+    )['access_token'];
+
+    return request(
+        'https://api.lucacastelnuovo.nl/mail/',
+        [
+            "access_token" => "{$access_token}",
+            "to" => "{$to}",
+            "subject" => "{$subject}",
+            "body" => "{$body}",
+            "from_name" => "LTC Auth"
+        ]
+    );
+}
+
+
+// Log stuff
+function log_action($action, $client_id = null, $user_id = null) {
+    $action = clean_data($action);
+    $time = date('Y-m-d H:i:s');
+    $user_id = clean_data($user_id);
+    $client_id = clean_data($client_id);
+    $ip = $_SERVER['REMOTE_ADDR'];
+
+    sql_insert('general_tokens', [
+        'action' => $action,
+        'time' => $time,
+        'user_id' => $user_id,
+        'client_id' => $client_id,
+        'ip' => $ip
+    ]);
 }
 
 
