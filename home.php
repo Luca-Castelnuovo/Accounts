@@ -21,8 +21,8 @@ page_header('Home');
 
 <?php if ($_SESSION['developer']) { ?>
 <div class="row">
-    <div class="row">
-        <div class="col s12 m9 p-0 mb-0">
+    <div class="row mb-0">
+        <div class="col s12 m9 p-0">
             <h4>Your clients</h4>
         </div>
         <div class="col s12 m3 p-0">
