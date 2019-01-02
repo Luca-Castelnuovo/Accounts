@@ -22,9 +22,9 @@ page_header('Logs');
 
         <tbody>
             <?php
-            $users = sql_select('logs', 'id,action,time,user_id,client_id,ip', "true", false);
+            $logs = sql_select('logs', 'id,action,time,user_id,client_id,ip', "true", false);
 
-            while ($user = $users->fetch_assoc()) {
+            while ($log_item = $logs->fetch_assoc()) {
                 echo <<<HTML
                 <tr id="{$log_item['id']}">
                     <td>{$log_item['action']}</td>
