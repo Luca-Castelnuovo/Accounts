@@ -88,6 +88,6 @@ response(
     [
         'access_token' => $access_token,
         'scope' => $scope_array,
-        'expires' => $GLOBALS['config']->auth->expires->access_token
+        'expires' => $expires
     ]
 );
