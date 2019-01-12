@@ -17,3 +17,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/panel/security.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/panel/template.php';
 
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/auth/validation.php';
+
+// External
+require '/var/www/logs.lucacastelnuovo.nl/public_html/logs.php';
+// log_action('1', 'service.test', $_SERVER["REMOTE_ADDR"], 'USER_ID', 'CLIENT_ID');
