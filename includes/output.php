@@ -76,24 +76,6 @@ function send_mail($to, $subject, $body)
 }
 
 
-// Log stuff
-function log_action($action, $client_id = 'not_set', $user_id = 'not_set') {
-    $action = clean_data($action);
-    $time = date('Y-m-d H:i:s');
-    $user_id = clean_data($user_id);
-    $client_id = clean_data($client_id);
-    $ip = $_SERVER['REMOTE_ADDR'];
-
-    sql_insert('general_tokens', [
-        'action' => $action,
-        'time' => $time,
-        'user_id' => $user_id,
-        'client_id' => $client_id,
-        'ip' => $ip
-    ]);
-}
-
-
 ##################
 # Message System #
 ##################
