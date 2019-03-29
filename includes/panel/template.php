@@ -18,6 +18,8 @@ function page_header($title = 'Unknown')
         <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
         <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#2962ff">
         <link rel="manifest" href="/site.webmanifest">
+
+        <script src="https://cdn.lucacastelnuovo.nl/analytics.lucacastelnuovo.nl/js/dynamic/tracking.35.js?site_id=5"></script>
     </head>
 
     <body>
@@ -45,14 +47,14 @@ HTML;
 
 function page_footer()
 {
-    echo <<<HTML
+    echo <<<'HTML'
             </div>
         </div>
         <script src="https://cdn.lucacastelnuovo.nl/general/js/materialize.js"></script>
         <script src="/js/init.js"></script>
 HTML;
     alert_display();
-    echo <<<HTML
+    echo <<<'HTML'
     </body>
 
     </html>
