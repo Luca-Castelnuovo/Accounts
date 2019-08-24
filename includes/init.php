@@ -21,3 +21,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/auth/validation.php';
 // External
 require '/var/www/logs.lucacastelnuovo.nl/public_html/logs.php';
 // log_action('1', 'service.test', $_SERVER["REMOTE_ADDR"], 'USER_ID', 'CLIENT_ID');
+
+require '/var/www/cdn.lucacastelnuovo.nl/include.php';
+// cdnPath('/var/www/general/js/ajax.js');
+// cdnPath('/general/js/ajax.js'); - recommended
+// cdnPath('general/js/ajax.js');

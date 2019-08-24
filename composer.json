@@ -1,0 +1,5 @@
+{
+    "require": {
+        "configcat/configcat-client": "^1.2"
+    }
+}

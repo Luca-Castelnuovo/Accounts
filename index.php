@@ -82,7 +82,7 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
     <title>Sign In</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.lucacastelnuovo.nl/general/css/materialize.css">
+    <link rel="stylesheet" href="<?= cdnPath('/general/css/materialize.css') ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <link rel="shortcut icon" href="/images/favicon.ico">
@@ -173,7 +173,7 @@ if (isset($_COOKIE['REMEMBERME']) && !empty($_COOKIE['REMEMBERME'])) {
         </div>
     </div>
 </div>
-    <script src="https://cdn.lucacastelnuovo.nl/general/js/materialize.js"></script>
+    <script src="<?= cdnPath('/general/js/materialize.js') ?>"></script>
     <script src="https://www.google.com/recaptcha/api.js?render=6LeuWIEUAAAAAF6aZy05cC5uNot2veX4IbsBxjza"></script>
     <script src="/js/login.js"></script>
     <?= alert_display() ?>

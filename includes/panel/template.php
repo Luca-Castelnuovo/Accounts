@@ -9,7 +9,7 @@ function page_header($title = 'Unknown')
     <head>
         <title>{$title}</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.lucacastelnuovo.nl/general/css/materialize.css">
+        <link rel="stylesheet" href="<?= cdnPath('/general/css/materialize.css') ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link rel="shortcut icon" href="/images/favicon.ico">
@@ -19,7 +19,7 @@ function page_header($title = 'Unknown')
         <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#2962ff">
         <link rel="manifest" href="/site.webmanifest">
 
-        <script src="https://cdn.lucacastelnuovo.nl/analytics.lucacastelnuovo.nl/js/dynamic/tracking.35.js?site_id=5"></script>
+        <script src="<?= cdnPath('/analytics.lucacastelnuovo.nl/js/dynamic/tracking.35.js?site_id=5') ?>"></script>
     </head>
 
     <body>
@@ -50,7 +50,7 @@ function page_footer()
     echo <<<'HTML'
             </div>
         </div>
-        <script src="https://cdn.lucacastelnuovo.nl/general/js/materialize.js"></script>
+        <script src="<?= cdnPath('/general/js/materialize.js') ?>"></script>
         <script src="/js/init.js"></script>
 HTML;
     alert_display();
