@@ -18,26 +18,18 @@ function page_header($title = 'Unknown')
         <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
         <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#2962ff">
         <link rel="manifest" href="/site.webmanifest">
-
-        <script>
+        
+        <!-- Analytics -->
+        <script type="text/javascript">
             var _paq = window._paq || [];
-            _paq.push(['setDownloadClasses', "track-download"]);
-            _paq.push(['setLinkClasses', "track-external"]);
-            _paq.push(['setIgnoreClasses', "track-disabled"]);
-            _paq.push(["trackPageView"]);
-            _paq.push(["enableLinkTracking"]);
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
             (function() {
-              var u = "https://analytics.lucacastelnuovo.nl/";
-              _paq.push(["setTrackerUrl", u + "matomo.php"]);
-              _paq.push(["setSiteId", 5]);
-              var d = document,
-                g = d.createElement("script"),
-                s = d.getElementsByTagName("script")[0];
-              g.type = "text/javascript";
-              g.async = true;
-              g.defer = true;
-              g.src = u + "matomo.js";
-              s.parentNode.insertBefore(g, s);
+                var u="//analytics.lucacastelnuovo.nl/";
+                _paq.push(['setTrackerUrl', u+'matomo.php']);
+                _paq.push(['setSiteId', '5']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
             })();
         </script>
     </head>
