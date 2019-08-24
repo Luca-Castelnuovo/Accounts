@@ -9,7 +9,7 @@ function page_header($title = 'Unknown')
     <head>
         <title>{$title}</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link rel="stylesheet" href="<?= cdnPath('/general/css/materialize.css') ?>">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link rel="shortcut icon" href="/images/favicon.ico">
@@ -19,7 +19,27 @@ function page_header($title = 'Unknown')
         <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#2962ff">
         <link rel="manifest" href="/site.webmanifest">
 
-        <script src="<?= cdnPath('/analytics.lucacastelnuovo.nl/js/dynamic/tracking.35.js?site_id=5') ?>"></script>
+        <script>
+            var _paq = window._paq || [];
+            _paq.push(['setDownloadClasses', "track-download"]);
+            _paq.push(['setLinkClasses', "track-external"]);
+            _paq.push(['setIgnoreClasses', "track-disabled"]);
+            _paq.push(["trackPageView"]);
+            _paq.push(["enableLinkTracking"]);
+            (function() {
+              var u = "https://analytics.lucacastelnuovo.nl/";
+              _paq.push(["setTrackerUrl", u + "matomo.php"]);
+              _paq.push(["setSiteId", 5]);
+              var d = document,
+                g = d.createElement("script"),
+                s = d.getElementsByTagName("script")[0];
+              g.type = "text/javascript";
+              g.async = true;
+              g.defer = true;
+              g.src = u + "matomo.js";
+              s.parentNode.insertBefore(g, s);
+            })();
+        </script>
     </head>
 
     <body>
@@ -50,7 +70,7 @@ function page_footer()
     echo <<<'HTML'
             </div>
         </div>
-        <script src="<?= cdnPath('/general/js/materialize.js') ?>"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="/js/init.js"></script>
 HTML;
     alert_display();

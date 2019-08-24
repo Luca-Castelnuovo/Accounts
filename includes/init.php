@@ -22,4 +22,3 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/auth/validation.php';
 
 // External
 require '/var/www/logs.lucacastelnuovo.nl/public_html/logs.php';
-require '/var/www/cdn.lucacastelnuovo.nl/include.php';
